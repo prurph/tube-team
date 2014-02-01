@@ -1,0 +1,7 @@
+<% @users.each do |user| %>
+  <p><%= user.username %></p>
+  <% if user.team.present? %>
+    <%= user.team.name %>
+    <%= user.team.points %> Points
+  <% end %>
+<% end %>
