@@ -1,13 +1,21 @@
 <h1>team show</h1>
-<%= @team.name %> <%= link_to "Release Team", @team, method: :delete, confirm:
+<% if @is_me %>
+  <%= link_to "Rename Team", edit_team_path %>
+  <%= @team.name %> <%= link_to "Release Team", @team, method: :delete, confirm:
  'This will delete your team and release all your videos. Confirm?' %>
- <%= link_to "Rename Team", edit_team_path %>
+<% end %>
 <ul>
   <% @team.videos.each do |video| %>
     <li><%= link_to video.title, video %> has scored <%= video.watches %> since
     <%= video.updated_at.strftime("%b '%y") %><br>
+
+    <% if @is_me %>
+
+        <!-- PROB REFACTOR THIS ISH AND PUT IT IN A HELPER? -->
         <%= link_to "Release video", team_video_path(@team, video),
         method: :delete, confirm: "This will release the video as a free agent. Confirm?" %>
+
+    <% end %>
     <%= link_to image_tag(video.thumbnail, alt: video.title), video %>
     </li>
   <% end %>

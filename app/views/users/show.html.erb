@@ -1,0 +1,9 @@
+<div>
+  <%= link_to @user.username, @user %><br>
+  Manager of: <%= link_to @team.name, @team %>
+  <!-- This is duplicated code (refactor if time) -->
+  <%= link_to "Release Team", @team, method: :delete, confirm:
+ 'This will delete your team and release all your videos. Confirm?' %><br>
+  Points: <%= @team.points %>
+  Rank: <%= @rank.ordinalize %>
+</div>

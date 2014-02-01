@@ -1,6 +1,8 @@
 <h1>Teams Index</h1>
 <ul>
-  <% @teams.each do |team| %>
-  <li><%= link_to team.name, team %></li>
+  <% @teams.each_with_index do |team, rank| %>
+  <li>
+    Rank: <%= rank %> <%= link_to team.name, team %> Points: <%= team.points %>
+  </li>
   <% end %>
 </ul>

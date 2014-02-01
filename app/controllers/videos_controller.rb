@@ -54,7 +54,7 @@ class VideosController < ApplicationController
       flash[:notice] = "Video signed!"
       redirect_to @team
     else
-      flash.now[:error] = team.errors.full_messages.join(', ')
+      flash.now[:alert] = team.errors.full_messages.join(', ')
       redirect_to @video
     end
   end
@@ -63,15 +63,15 @@ class VideosController < ApplicationController
     team = Team.find(params[:team_id])
     video = Video.find(params[:id])
     if team.user != current_user
-      flash[:error] = "You are not the manager of #{team.name}!"
-      redirect_to :show
+      flash[:alert] = "You are not the manager of #{team.name}!"
+      return redirect_to team
     end
 
     if video.destroy!
       flash[:notice] = "#{video.title} is now a free agent!"
       redirect_to team
     else
-      flash[:error] = video.errors.full_messages.join(', ')
+      flash[:alert] = video.errors.full_messages.join(', ')
     end
   end
 
