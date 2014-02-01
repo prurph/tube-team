@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
 
     if current_user.save
       flash[:notice] = "Team created!"
-      redirect_to action: :show
+      redirect_to team
     else
       flash.now[:error] = article.errors.full_messages.join(', ')
       render :new
