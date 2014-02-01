@@ -1,7 +1,10 @@
 <h1>team show</h1>
-<%= @team.name %>
+<%= @team.name %> <%= link_to "Release Team", @team, method: :delete, confirm:
+ 'This will delete your team and release all your videos. Confirm?' %>
 <ul>
   <% @team.videos.each do |video| %>
-  <%= video.title %> has scored <%= video.watches %> since
-  <%= video.updated_at.strftime("%b '%y") %>
-<% end %>
+    <li><%= video.title %> has scored <%= video.watches %> since
+    <%= video.updated_at.strftime("%b '%y") %></li>
+  <% end %>
+</ul>
+

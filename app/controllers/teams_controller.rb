@@ -41,9 +41,10 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team.update_attributes(team_params)
+    team = Team.find(params[:id])
+    team.update_attributes(team_params)
 
-    if @team.save
+    if team.save
       flash[:notice] = "Team name updated!"
       redirect_to action: :show
     else
@@ -53,12 +54,22 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    if @team.destroy
-      flash[:notice] = "Team deleted"
+    team = Team.find(params[:id])
+    videos = team.videos
+
+    if current_user.id != team.user_id
+      flash[:notice] = "You're not the manager of #{team.name}!"
       redirect_to action: :show
-    else
-      flash[:error] = @team.errors.full_messages.join(', ')
-      redirect_to :back
+    end
+
+    # Transaction should require that we destroy (release) all videos and team
+    # together or neither happens
+
+    ActiveRecord::Base.transaction do
+      videos.each { |video| video.destroy! }
+      team.destroy!
+      flash[:notice] = "Team deleted"
+      redirect_to action: :index
     end
   end
 
