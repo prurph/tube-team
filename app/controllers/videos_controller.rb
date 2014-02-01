@@ -10,9 +10,8 @@ class VideosController < ApplicationController
   end
 
   def create
-    # Redirect away if video exists in database already and is on a team
-    redirect_to action: :show if (exists = Video.find_by_yt_id(video_params[:yt_id]) &&
-                          exists.team_id.present? )
+    # Redirect away if video already exists (:show will determine if it's on a team)
+    redirect_to action: :show if Video.find_by_yt_id(video_params[:yt_id])
     # Otherwise create the video so it can be signed
     video_attributes = make_video(video_params[:yt_id])
 
@@ -25,11 +24,12 @@ class VideosController < ApplicationController
     video = Video.create(video_attributes)
 
     # Video exists now, so pass to videos#edit with team info so user can sign
-    redirect_to :show
     redirect_to edit_team_video_path(current_user.team.id, video.id)
   end
 
   def edit
+    @team = Team.find(params[:team_id])
+    @video = Video.find(params[:id])
   end
 
   private

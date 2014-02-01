@@ -1,4 +1,6 @@
 <h1> videos#edit has team_id too (assign videos here)</h1>
-<%= form_for [@video, @team] do %>
-  <%= form.submit "Sign video?" %>
+<%= @video.title %> has
+<%= @video.watches %>
+<%= form_for [@team, @video] do |form| %>
+  <%= form.submit "Sign video?" %> to <%= @team.name %>
 <% end %>
