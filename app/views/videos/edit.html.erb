@@ -2,5 +2,5 @@
 <%= @video.title %> has
 <%= @video.watches %>
 <%= form_for [@team, @video] do |form| %>
-  <%= form.submit "Sign video?" %> to <%= @team.name %>
+  <%= form.submit "Sign video" %> to <%= @team.name %>
 <% end %>

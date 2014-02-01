@@ -1,0 +1,7 @@
+<h1>team show</h1>
+<%= @team.name %>
+<ul>
+  <% @team.videos.each do |video| %>
+  <%= video.name %> has scored <%= video.watches %> since
+  <%= video.updated_at.strftime(%b,%y) %>
+<% end %>

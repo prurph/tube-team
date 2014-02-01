@@ -20,7 +20,6 @@ class VideosController < ApplicationController
                         salary: 10000000,
                         watches: 0
     })
-    binding.pry
     video = Video.create(video_attributes)
 
     # Video exists now, so pass to videos#edit with team info so user can sign
@@ -30,6 +29,26 @@ class VideosController < ApplicationController
   def edit
     @team = Team.find(params[:team_id])
     @video = Video.find(params[:id])
+  end
+
+  def update
+    @team = Team.find(params[:team_id])
+    @video = Video.find(params[:id])
+
+    # Make sure someone isn't doing form trickery to change another user's team
+    if current_user.team.id != @team.id
+      flash[:error] = "You are not the manager of this team."
+      # FIX THIS REDIRECT PATH LATER
+      redirect_to root
+    end
+
+    # Otherwise sign the video to the team
+    if @team.videos << @video
+      flash[:notice] = "Video signed!"
+      redirect_to @team
+    else
+      flash.now[:error] = team.errors.full_messages.join(', ')
+    end
   end
 
   private
@@ -45,7 +64,9 @@ class VideosController < ApplicationController
                   author: video.author.name,
                   uploaded_at: video.uploaded_at,
                   embed_html5: video.embed_html5,
-                  description: video.description
+                  description: video.description,
+                  # Get the largest thumbnail available by sorting on height
+                  thumbnail: video.thumbnails.sort_by { |tn| tn.height }.last.url
                  }
     attributes
   end
