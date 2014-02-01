@@ -1,0 +1,26 @@
+<h1>Videos#Show</h1>
+
+<%= @video.title %> Views: <%= @video.initial_watches %>
+Salary: <%= @video.salary %>
+<%= @on_team || ( link_to "Free Agent", edit_team_video_path(@user_team, @video))  %>
+<div>
+ <%= @video.embed_html5.html_safe %>
+</div>
+
+
+
+
+
+<!--   t.integer  "salary"
+    t.integer  "initial_watches"
+    t.integer  "watches"
+    t.string   "yt_id"
+    t.text     "description"
+    t.datetime "uploaded_at"
+    t.text     "author"
+    t.string   "embed_html5"
+    t.integer  "team_id"
+    t.text     "title"
+    t.text     "thumbnail"
+    t.datetime "updated_at"
+    t.datetime "created_at" -->

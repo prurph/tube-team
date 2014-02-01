@@ -7,6 +7,8 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @on_team = ( @video.team.present? ? @video.team.name : false )
+    @user_team = current_user.team
   end
 
   def create
@@ -23,7 +25,9 @@ class VideosController < ApplicationController
     video = Video.create(video_attributes)
 
     # Video exists now, so pass to videos#edit with team info so user can sign
-    redirect_to edit_team_video_path(current_user.team.id, video.id)
+    # This was old, now trying to just incorporate into show page
+    # redirect_to edit_team_video_path(current_user.team.id, video.id)
+    redirect_to video
   end
 
   def edit
@@ -48,6 +52,7 @@ class VideosController < ApplicationController
       redirect_to @team
     else
       flash.now[:error] = team.errors.full_messages.join(', ')
+      redirect_to @video
     end
   end
 
