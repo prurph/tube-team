@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 gem 'youtube_it'
 gem 'devise'
+gem 'pry'
 
 # Use postgresql as the database for Active Record
 gem 'pg'

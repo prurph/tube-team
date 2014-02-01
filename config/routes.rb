@@ -4,6 +4,12 @@ TubeTeam::Application.routes.draw do
 
   resources :users
   resources :teams
+  resources :videos
+
+  resources :teams do
+    resources :videos, only: [:edit, :update]
+  end
+
 
   root 'static_pages#home'
 
