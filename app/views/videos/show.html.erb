@@ -2,7 +2,11 @@
 
 <%= @video.title %> Views: <%= @video.initial_watches %>
 Salary: <%= @video.salary %>
-<%= @on_team || ( link_to "Free Agent", edit_team_video_path(@user_team, @video))  %>
+<% if @on_team %>
+  <%= link_to @on_team.name, @on_team %>
+<% else %>
+  <%= link_to "Free Agent", edit_team_video_path(@user_team, @video) %>
+<% end %>
 <div>
  <%= @video.embed_html5.html_safe %>
 </div>

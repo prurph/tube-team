@@ -7,13 +7,16 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    @on_team = ( @video.team.present? ? @video.team.name : false )
+    @on_team = ( @video.team.present? ? @video.team : false )
     @user_team = current_user.team
   end
 
   def create
     # Redirect away if video already exists (:show will determine if it's on a team)
-    redirect_to action: :show if Video.find_by_yt_id(video_params[:yt_id])
+    exists = Video.find_by_yt_id(video_params[:yt_id])
+    if exists
+      return redirect_to exists
+    end
     # Otherwise create the video so it can be signed
     video_attributes = make_video(video_params[:yt_id])
 
