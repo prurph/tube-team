@@ -68,6 +68,9 @@ class TeamsController < ApplicationController
     ActiveRecord::Base.transaction do
       videos.each { |video| video.destroy! }
       team.destroy!
+
+      # Probably want a rescue block in here?
+
       flash[:notice] = "Team deleted"
       redirect_to action: :index
     end

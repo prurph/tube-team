@@ -51,6 +51,22 @@ class VideosController < ApplicationController
     end
   end
 
+  def destroy
+    team = Team.find(params[:team_id])
+    video = Video.find(params[:id])
+    if team.user != current_user
+      flash[:error] = "You are not the manager of #{team.name}!"
+      redirect_to :show
+    end
+
+    if video.destroy!
+      flash[:notice] = "#{video.title} is now a free agent!"
+      redirect_to team
+    else
+      flash[:error] = video.errors.full_messages.join(', ')
+    end
+  end
+
   private
 
   def make_video(youtube_id)

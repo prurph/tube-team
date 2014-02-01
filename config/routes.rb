@@ -7,7 +7,7 @@ TubeTeam::Application.routes.draw do
   resources :videos
 
   resources :teams do
-    resources :videos, only: [:edit, :update]
+    resources :videos, only: [:edit, :update, :destroy]
   end
 
 
