@@ -10,6 +10,7 @@ class CreateVideos < ActiveRecord::Migration
       t.string :author
       t.string :embed_html5
       t.references :team, index: true
+      t.timestamps
     end
   end
 end
