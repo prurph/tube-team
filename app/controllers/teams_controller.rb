@@ -7,7 +7,7 @@ class TeamsController < ApplicationController
 
   def new
     if current_user.team.present?
-      flash[:notice] = "One team per user. Must delete current team first."
+      flash[:error] = "One team per user. Must delete current team first."
       redirect_to action: :show
     end
 
@@ -28,6 +28,10 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    if !current_user.team.present?
+      flash[:error] = "No existing teams."
+      redirect_to action: :new
+    end
     @team = Team.find(current_user.team)
   end
 
@@ -40,6 +44,16 @@ class TeamsController < ApplicationController
     else
       flash.now[:error] = article.errors.full_messages.join(', ')
       render :edit
+    end
+  end
+
+  def destroy
+    if @team.destroy
+      flash[:notice] = "Team deleted"
+      redirect_to action: :show
+    else
+      flash[:error] = @team.errors.full_messages.join(', ')
+      redirect_to :back
     end
   end
 
