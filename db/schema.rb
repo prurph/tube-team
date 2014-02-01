@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201023716) do
+ActiveRecord::Schema.define(version: 20140201035923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "teams", force: true do |t|
+    t.integer "salary"
+    t.text    "name"
+    t.integer "watches", default: 0
+    t.integer "user_id"
+  end
+
+  add_index "teams", ["user_id"], name: "index_teams_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
