@@ -10,11 +10,13 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @is_me = (@team.user == current_user)
-    @videos = @team.videos unless @team.videos.blank?
-    @rank = get_rank(@team)
-    @videos.each do |video|
-      refresh_watches(video.id)
+    if @team.videos.present?
+      @videos = @team.videos
+      @videos.each do |video|
+        refresh_watches(video.id)
+      end
     end
+    @rank = get_rank(@team)
   end
 
   def new
@@ -28,7 +30,11 @@ class TeamsController < ApplicationController
 
   def create
     # Is this legit? Current user_id merge into team_params hash.
-    team = Team.create!({ user_id: current_user.id }.merge(team_params))
+    attributes = {
+                   user_id: current_user.id,
+                   salary: 10000000 # This is default salary for now
+                  }
+    team = Team.create!(attributes.merge(team_params))
 
     if current_user.save
       flash[:notice] = "Team created!"
@@ -40,7 +46,7 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    if !current_user.team.present?
+    if current_user.team.blank?
       flash[:alert] = "No existing teams."
       redirect_to action: :new
     end
@@ -55,7 +61,6 @@ class TeamsController < ApplicationController
     else
       team.update_attributes(team_params)
     end
-
 
     if team.save
       flash[:notice] = "Team name updated!"

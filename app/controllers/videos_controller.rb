@@ -58,7 +58,7 @@ class VideosController < ApplicationController
       flash[:alert] = "You are not the manager of this team."
       # Do I need a return here? (Any chance other block executes?)
       return redirect_to :back
-    elsif exceed_cap(video.id)
+    elsif exceed_cap(@video.salary)
       flash[:alert] = "Insufficient funds!"
       return redirect_to :back
     end
@@ -82,7 +82,9 @@ class VideosController < ApplicationController
     end
 
     if video.destroy!
-      flash[:notice] = "#{video.title} is now a free agent!"
+      flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
+                        in funds!"
+      team.update_attributes(salary: (team.salary + video.salary))
       redirect_to team
     else
       flash[:alert] = video.errors.full_messages.join(', ')
@@ -93,6 +95,10 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:yt_id)
+  end
+
+  def exceed_cap(vidsalary)
+    current_user.team.salary < vidsalary
   end
 end
 
