@@ -3,7 +3,9 @@
   <%= link_to "Rename Team", edit_team_path %>
   <%= @team.name %> <%= link_to "Release Team", @team, method: :delete, data:
   { confirm: 'This will delete your team and release all your videos. Confirm?' } %>
-  <%= link_to "Scout for players", new_video_path %>
+  <% if @team.videos.length < 5 %>
+    <%= link_to "Scout for players", new_video_path %>
+  <% end %>
 <% end %>
 Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
 

@@ -25,6 +25,9 @@ class VideosController < ApplicationController
   def new
     if current_user.team.present?
       @video = Video.new
+    elsif current_user.team.videos.length >= 5
+      flash[:alert] = "Teams have a maximum of 5 players."
+      return redirect_to team_video_path(current_user.team.id)
     else
       flash[:alert] = "Please create a team before scouting for players"
       redirect_to new_team_path

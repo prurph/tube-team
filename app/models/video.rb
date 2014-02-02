@@ -12,7 +12,10 @@ class Video < ActiveRecord::Base
                 initial_watches: video.view_count,
                 author: video.author.name,
                 uploaded_at: video.uploaded_at,
-                embed_html5: video.embed_html5,
+                embed_html5: video.embed_html5({class: 'video-player',
+                                                width: '425',
+                                                height: '350',
+                                                frameborder: '0'}),
                 description: video.description,
                 # Get the largest thumbnail available by sorting on height
                 thumbnail: video.thumbnails.sort_by { |tn| tn.height }.last.url
