@@ -15,4 +15,11 @@ class Team < ActiveRecord::Base
 
     self.update_attributes(points: points)
   end
+
+  def get_rank
+    # This is probably not a good idea to do every time someone loads a team
+    # later create a ranking field for users and run a rake task to update it
+    # periodically
+    Team.all.order(:points).index(self)
+  end
 end

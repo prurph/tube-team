@@ -2,7 +2,7 @@
 <ul>
   <% @teams.each_with_index do |team, rank| %>
   <li>
-    Rank: <%= rank %> <%= link_to team.name, team %> Points: <%= team.points %>
+    Rank: <%= (rank+1).ordinalize %> <%= link_to team.name, team %> Points: <%= team.points %>
   </li>
   <% end %>
 </ul>

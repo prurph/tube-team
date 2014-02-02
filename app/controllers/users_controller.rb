@@ -17,16 +17,6 @@ class UsersController < ApplicationController
       end
     end
     @me = (@user == current_user)
-    @rank = get_rank(@team)
+    @rank = @team.get_rank
   end
-
-  private
-
-  def get_rank(team)
-    # This is probably not a good idea to do every time someone loads a team
-    # later create a ranking field for users and run a rake task to update it
-    # periodically
-    Team.all.order(:points).index(team)
-  end
-
 end
