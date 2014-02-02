@@ -17,9 +17,12 @@ class VideosController < ApplicationController
     if @video.team.present?
       @on_team = @video.team
       # If video isn't a free agent refresh the watches (data might be stale)
-      refresh_watches(@video)
+      # If it's a free agent it was just created so no worries
+      @video.refresh_watches
+      # Update points (for now this updates for all time)
     end
     @user_team = current_user.team
+    @video.update_points
   end
 
   def create
@@ -35,7 +38,8 @@ class VideosController < ApplicationController
     # Leave these here so more advanced functionality can be set later
     # For now salary is equal to watches at time video info is pulled
     video_attributes.merge!({ salary: video_attributes[:initial_watches],
-                              watches: 0 })
+                              watches: 0,
+                              points: 0 })
     video = Video.create(video_attributes)
 
     # Video exists now, so pass to videos#edit with team info so user can sign

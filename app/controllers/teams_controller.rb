@@ -13,8 +13,10 @@ class TeamsController < ApplicationController
     if @team.videos.present?
       @videos = @team.videos
       @videos.each do |video|
-        refresh_watches(video.id)
+        video.refresh_watches
+        video.update_points
       end
+      @team.update_points
     end
     @rank = get_rank(@team)
   end

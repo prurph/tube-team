@@ -1,9 +1,11 @@
 <h1>Videos#Show</h1>
 
 <%= @video.title %> Views: <%= @video.initial_watches %>
-Salary: <%= @video.salary %>
+Salary: <%= @video.salary %><br>
 <% if @on_team %>
-  <%= link_to @on_team.name, @on_team %>
+  Plays for: <%= link_to @on_team.name, @on_team %>
+  Has scored <%= @video.points %> points with <%= @video.watches %> watches since
+  <%= @video.created_at.strftime("%b %e'%y") %>
 <% else %>
   <%= link_to "Free Agent", edit_team_video_path(@user_team, @video) %>
 <% end %>

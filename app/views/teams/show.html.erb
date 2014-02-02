@@ -9,8 +9,9 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
 <ul>
   <% if @videos.present? %>
     <% @videos.each do |video| %>
-      <li><%= link_to video.title, video %> has scored <%= video.watches %>
+      <li><%= link_to video.title, video %> has scored <%= video.points %>
        points since joining your team on <%= video.created_at.strftime("%b %e'%y") %><br>
+       It has been watched <%= video.watches %> times since then.
        Salary: <%= video.salary %>
 
       <% if @is_me %>

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       if @team.videos.present?
         # Update the watches
         @team.videos.each do |video|
-          refresh_watches(video.id)
+          video.refresh_watches
         end
         @videos = @team.videos
       end

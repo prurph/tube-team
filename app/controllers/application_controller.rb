@@ -24,42 +24,24 @@ class ApplicationController < ActionController::Base
     attributes
   end
 
-  def refresh_watches(video_id)
-    video = Video.find(video_id)
+  # def refresh_watches(video_id)
+  #   video = Video.find(video_id)
 
-    client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
-    new_data = client.video_by(video.yt_id)
+  #   client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
+  #   new_data = client.video_by(video.yt_id)
 
-    attributes = {
-                  watches: new_data.view_count
-    }
+  #   attributes = {
+  #                 watches: new_data.view_count
+  #   }
 
-    # Update the watch count in the video entry itself to track watches since
-    # joining the user's team
-    video.update_attributes(watches: (new_data.view_count - video.initial_watches))
-    # And create a timestamped watch
-    update = WatchUpdate.create(attributes)
-    video.watch_updates << update
-    video.save
-  end
-
-  def update_points(video_id,
-                    end_time=Time.now,
-                    start_time=Time.new(1982, 9, 2, 2, 1, 0, "-05:00"))
-    updates = WatchUpdate.all(conditions:
-                              { created_at: (start_time..end_time),
-                                video_id: video_id })
-
-    updates.sort! {|update| update.watches }
-    points = updates.first.watches - updates.last.watches
-
-    points = 0
-    updates.each do |update|
-      update.watches >
-      up.video.team.update_attributes(points: )
-  end
-
-
+  #   # Update the watch count in the video entry itself to track watches since
+  #   # joining the user's team
+  #   video.update_attributes(watches: (new_data.view_count - video.initial_watches))
+  #   # And create a timestamped watch
+  #   update = WatchUpdate.create(attributes)
+  #   video.watch_updates << update
+  #   video.save
+  # end
 
   protected
   def configure_permitted_parameters

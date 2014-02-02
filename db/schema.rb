@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140202033518) do
     t.text     "thumbnail"
     t.datetime "updated_at"
     t.datetime "created_at"
+    t.integer  "points"
   end
 
   add_index "videos", ["team_id"], name: "index_videos_on_team_id", using: :btree
