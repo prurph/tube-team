@@ -26,24 +26,22 @@ class VideosController < ApplicationController
   end
 
   def create
+    begin
     # Redirect away if video already exists (#show will determine if it's on a team)
-    exists = Video.find_by_yt_id(video_params[:yt_id])
+      exists = Video.find_by_yt_id(video_params[:yt_id])
 
-    if exists
-      return redirect_to exists
+      if exists
+        return redirect_to exists
+      else
+      # Get info from API to make the video
+        new_video = Video.make_video(video_params[:yt_id])
+        redirect_to new_video
+      end
+
+    rescue OpenURI::HTTPError
+      flash[:alert] = "Invalid YouTube ID"
+      redirect_to :back
     end
-    # Otherwise create the video so it can be signed
-    video_attributes = make_video(video_params[:yt_id])
-
-    # Leave these here so more advanced functionality can be set later
-    # For now salary is equal to watches at time video info is pulled
-    video_attributes.merge!({ salary: video_attributes[:initial_watches],
-                              watches: 0,
-                              points: 0 })
-    video = Video.create(video_attributes)
-
-    # Video exists now, so pass to videos#edit with team info so user can sign
-    redirect_to video
   end
 
   def edit
