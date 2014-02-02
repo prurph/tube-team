@@ -48,28 +48,30 @@ class VideosController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:team_id])
-    @video = Video.find(params[:id])
+    team = Team.find(params[:team_id])
+    video = Video.find(params[:id])
 
     # Check for traps: form trickery to change another user's team
     # or not enough money to sign
 
-    if current_user.team.id != @team.id
+    if current_user.team.id != team.id
       flash[:alert] = "You are not the manager of this team."
       # Do I need a return here? (Any chance other block executes?)
       return redirect_to :back
-    elsif exceed_cap(@video.salary)
+    elsif exceed_cap(video.salary)
       flash[:alert] = "Insufficient funds!"
       return redirect_to :back
     end
 
     # Otherwise sign the video to the team
-    if @team.videos << @video
-      flash[:notice] = "Video signed!"
-      redirect_to @team
+    if team.videos << video
+      flash[:notice] = "Video signed! #{video.salary} deducted."
+      team.update_attributes(bankroll: (team.bankroll - video.salary),
+                             salary:   (team.salary + video.salary))
+      redirect_to team
     else
       flash.now[:alert] = team.errors.full_messages.join(', ')
-      redirect_to @video
+      redirect_to video
     end
   end
 
@@ -81,10 +83,11 @@ class VideosController < ApplicationController
       return redirect_to team
     end
 
-    if video.destroy!
+    if video.destroy
       flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
                         in funds!"
-      team.update_attributes(salary: (team.salary + video.salary))
+      team.update_attributes(bankroll: (team.bankroll + video.salary),
+                             salary:   (team.salary - video.salary))
       redirect_to team
     else
       flash[:alert] = video.errors.full_messages.join(', ')
@@ -98,7 +101,7 @@ class VideosController < ApplicationController
   end
 
   def exceed_cap(vidsalary)
-    current_user.team.salary < vidsalary
+    current_user.team.bankroll < vidsalary
   end
 end
 

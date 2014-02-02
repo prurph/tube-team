@@ -1,6 +1,6 @@
 <h1> videos#edit has team_id too (assign videos here)</h1>
-<%= @video.title %> has
-<%= @video.watches %>
+<%= @video.title %> has <%= @video.initial_watches %><br>
+Signing it will cost: <%= @video.salary %>. Your bankroll is: <%= @team.bankroll %>.
 <%= form_for [@team, @video] do |form| %>
   <%= form.submit "Sign video" %> to <%= @team.name %>
 <% end %>

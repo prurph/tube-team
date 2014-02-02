@@ -29,10 +29,10 @@ class TeamsController < ApplicationController
   end
 
   def create
-    # Is this legit? Current user_id merge into team_params hash.
     attributes = {
                    user_id: current_user.id,
-                   salary: 10000000 # This is default salary for now
+                   bankroll: 10000000, # This is default starting cash for now
+                   salary: 0
                   }
     team = Team.create!(attributes.merge(team_params))
 
@@ -79,16 +79,13 @@ class TeamsController < ApplicationController
       flash[:notice] = "You're not the manager of #{team.name}!"
       return redirect_to team
     else
-      # Transaction should require that we destroy (release) all videos and team
-      # together or neither happens
-      ActiveRecord::Base.transaction do
-        videos.each { |video| video.destroy! }
-        team.destroy!
-
-        # Probably want a rescue block in here?
-
+      # videos have dependent: :destroy relationship with team
+      if team.destroy
         flash[:notice] = "Team deleted"
         redirect_to action: :index
+      else
+        flash[:alert] = team.errors.full_messages.join(', ')
+        redirect_to :edit
       end
     end
   end
