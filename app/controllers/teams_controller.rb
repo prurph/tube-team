@@ -10,17 +10,20 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @is_me = (@team.user == current_user)
-    @videos = @team.videos
+    @videos = @team.videos unless @team.videos.blank?
     @rank = get_rank(@team)
+    @videos.each do |video|
+      refresh_watches(video.id)
+    end
   end
 
   def new
     if current_user.team.present?
       flash[:alert] = "One team per user. Must delete current team first."
       redirect_to action: :show
+    else
+      @team = Team.new
     end
-
-    @team = Team.new
   end
 
   def create

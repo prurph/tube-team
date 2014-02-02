@@ -6,9 +6,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @team = @user.team
+    if @user.team.present?
+      @team = @user.team
+      if @team.videos.present?
+        # Update the watches
+        @team.videos.each do |video|
+          refresh_watches(video.id)
+        end
+        @videos = @team.videos
+      end
+    end
     @me = (@user == current_user)
-    @videos = @team.videos
     @rank = get_rank(@team)
   end
 

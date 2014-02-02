@@ -1,13 +1,14 @@
 <h1>team show</h1>
 <% if @is_me %>
   <%= link_to "Rename Team", edit_team_path %>
-  <%= @team.name %> <%= link_to "Release Team", @team, method: :delete, confirm:
- 'This will delete your team and release all your videos. Confirm?' %>
+  <%= @team.name %> <%= link_to "Release Team", @team, method: :delete, data:
+  { confirm: 'This will delete your team and release all your videos. Confirm?' } %>
+  <%= link_to "Scout for players", new_video_path %>
 <% end %>
 <ul>
-  <% @team.videos.each do |video| %>
-    <li><%= link_to video.title, video %> has scored <%= video.watches %> since
-    <%= video.updated_at.strftime("%b '%y") %><br>
+  <% @videos.each do |video| %>
+    <li><%= link_to video.title, video %> has scored <%= video.watches %>
+     points since joining your team on <%= video.created_at.strftime("%b %e'%y") %><br>
 
     <% if @is_me %>
 
