@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
 
   def make_video(youtube_id)
-    client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
+    client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
     video = client.video_by(youtube_id)
 
     attributes = {
@@ -23,25 +23,6 @@ class ApplicationController < ActionController::Base
                  }
     attributes
   end
-
-  # def refresh_watches(video_id)
-  #   video = Video.find(video_id)
-
-  #   client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
-  #   new_data = client.video_by(video.yt_id)
-
-  #   attributes = {
-  #                 watches: new_data.view_count
-  #   }
-
-  #   # Update the watch count in the video entry itself to track watches since
-  #   # joining the user's team
-  #   video.update_attributes(watches: (new_data.view_count - video.initial_watches))
-  #   # And create a timestamped watch
-  #   update = WatchUpdate.create(attributes)
-  #   video.watch_updates << update
-  #   video.save
-  # end
 
   protected
   def configure_permitted_parameters

@@ -28,13 +28,13 @@ class Video < ActiveRecord::Base
   end
 
   def self.make_video(youtube_id)
-    client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
+    client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
     video = client.video_by(youtube_id)
     self.create!(self.make_attributes(video))
   end
 
   def self.make_search_vids(search_term)
-    client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
+    client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
     # Run the search and return top 5 results
     videos = client.videos_by(query: search_term).videos.slice!(0,5)
     # Make an array of video objects from the API results
@@ -47,20 +47,21 @@ class Video < ActiveRecord::Base
   end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
-    updates = WatchUpdate.where(created_at: (start_time..end_time),
-                                video_id: self.id).to_a
+    updates = WatchUpdate.where(created_at: (end_time..start_time),
+                                video_id: self.id)
 
-    updates.sort! {|x,y| y.watches <=> x.watches }
+    updates.sort_by!(&:watches)
 
     # Short-circuit to assign add_watches to 0 if there are no watch_updates yet
-    add_watches = (updates.blank? ? 0 : updates.first.watches - updates.last.watches)
+    add_watches = (updates.blank? ? 0 : updates.last.watches - updates.first.watches)
 
     # Here's where to add in a weighting algorithm based on total watches
     self.update_attributes(points: add_watches)
+    self.save
   end
 
   def refresh_watches
-    client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
+    client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
     new_data = client.video_by(self.yt_id)
 
     attributes = {

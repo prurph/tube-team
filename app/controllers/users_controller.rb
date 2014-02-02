@@ -15,8 +15,9 @@ class UsersController < ApplicationController
         end
         @videos = @team.videos
       end
+      @team.update_points
+      @rank = @team.get_rank
     end
     @me = (@user == current_user)
-    @rank = @team.get_rank
   end
 end

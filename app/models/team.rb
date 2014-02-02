@@ -12,8 +12,7 @@ class Team < ActiveRecord::Base
       video.update_points(end_time, start_time)
       to_add += video.points
     end
-
-    self.update_attributes(points: points)
+    self.update_attributes(points: to_add)
   end
 
   def get_rank
