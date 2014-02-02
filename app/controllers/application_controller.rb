@@ -43,19 +43,21 @@ class ApplicationController < ActionController::Base
     video.save
   end
 
-  def update_points(end_time=Time.now, start_time=Time.new(1982, 9, 2, 2, 1, 0, "-05:00"),
-                    team_id="false")
-    # If a team is specified put it in an array, otherwise get array of all teams
-    teams = team_id && [Team.find(team_id)] || Team.all
+  def update_points(video_id,
+                    end_time=Time.now,
+                    start_time=Time.new(1982, 9, 2, 2, 1, 0, "-05:00"))
+    updates = WatchUpdate.all(conditions:
+                              { created_at: (start_time..end_time),
+                                video_id: video_id })
 
-    # Look for a better way to do this
-    # teams.each do |team|
-    #   team.videos.each do |video|
-    #     video.watch_updates.each do |watch_update|
-    #       if end_time < watch_update && watch_update < end_time
-    #         video.update_attributes
+    updates.sort! {|update| update.watches }
+    points = updates.first.watches - updates.last.watches
 
-    end
+    points = 0
+    updates.each do |update|
+      update.watches >
+      up.video.team.update_attributes(points: )
+  end
 
 
 
