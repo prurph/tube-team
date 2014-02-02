@@ -30,13 +30,12 @@ class Video < ActiveRecord::Base
     self.create!(self.make_attributes(video))
   end
 
-  def self.search_videos(search_term)
+  def self.make_search_vids(search_term)
     client = YouTubeIt::Client.new(dev_key: "AIzaSyDeEE8UySfWfxuO3hz_Qwsj4R3atx-OF70")
     # Run the search and return top 5 results
     videos = client.videos_by(query: search_term).videos.slice!(0,5)
     # Make an array of video objects from the API results
     videos.map!{|video| Video.make_video(video.unique_id)}
-    return videos
   end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)

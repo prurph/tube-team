@@ -1,6 +1,44 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @videos = Video.find params[:id].split(',')
+
+    # If only one video stick it in an array so we can iterate over it too
+    [@videos] if @videos.class == Video
+
+    @videos.each do |video|
+      if video.team.present?
+        # If video isn't a free agent refresh the watches (data might be stale)
+        # If it's a free agent it was just created so no worries
+        video.refresh_watches
+      end
+      # Update points (for now this updates for all time)
+      video.update_points
+    end
+
+    @user_team = current_user.team
+  end
+
+  # def show
+  #   params[:id] = params[:id].join(',') if params[:id].class == Array
+  #   @videos = Video.find(params[:id])
+
+  #   @videos.each_with_index do |video, index|
+
+  #     if @video.team.present?
+  #       @on_team = @video.team
+  #       # If video isn't a free agent refresh the watches (data might be stale)
+  #       # If it's a free agent it was just created so no worries
+  #       @video.refresh_watches
+  #       # Update points (for now this updates for all time)
+  #     end
+  #     @user_team = current_user.team
+  #     @video.update_points
+  # end
+
+  # new and create work to find make a single vid from yt_id and
+
   def new
     if current_user.team.present?
       @video = Video.new
@@ -8,21 +46,6 @@ class VideosController < ApplicationController
       flash[:alert] = "Please create a team before scouting for players"
       redirect_to new_team_path
     end
-  end
-
-  def show
-    @video = Video.find(params[:id])
-
-    @on_team = false
-    if @video.team.present?
-      @on_team = @video.team
-      # If video isn't a free agent refresh the watches (data might be stale)
-      # If it's a free agent it was just created so no worries
-      @video.refresh_watches
-      # Update points (for now this updates for all time)
-    end
-    @user_team = current_user.team
-    @video.update_points
   end
 
   def create
@@ -35,13 +58,27 @@ class VideosController < ApplicationController
       else
       # Get info from API to make the video
         new_video = Video.make_video(video_params[:yt_id])
-        redirect_to new_video
+        redirect_to :index
       end
 
     rescue OpenURI::HTTPError
       flash[:alert] = "Invalid YouTube ID"
       redirect_to :back
     end
+  end
+
+  # new_search and create_search handle generic search terms (return 5 videos)
+  def new_search
+    if current_user.team.blank?
+      flash[:alert] = "Please create a team before scouting for players"
+      redirect_to new_team_path
+    end
+  end
+
+  def create_search
+    # Return an array of video objects
+    search_results = Video.make_search_vids(search_params)
+
   end
 
   def edit
@@ -100,6 +137,10 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:yt_id)
+  end
+
+  def search_params
+    params.require(:term)
   end
 
   def exceed_cap(vidsalary)

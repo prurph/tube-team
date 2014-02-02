@@ -1,17 +1,23 @@
 <h1>Videos#Show</h1>
 
-<%= @video.title %> Views: <%= @video.initial_watches %>
-Salary: <%= @video.salary %><br>
-<% if @on_team %>
-  Plays for: <%= link_to @on_team.name, @on_team %>
-  Has scored <%= @video.points %> points with <%= @video.watches %> watches since
-  <%= @video.created_at.strftime("%b %e'%y") %>
-<% else %>
-  <%= link_to "Free Agent", edit_team_video_path(@user_team, @video) %>
-<% end %>
-<div>
- <%= @video.embed_html5.html_safe %>
-</div>
+<ul>
+  <% @videos.each do |video| %>
+    <li>
+      <%= video.title %> Views: <%= video.initial_watches + video.watches %>
+      Salary: <%= video.salary %><br>
+      <% if video.team.present? %>
+        Plays for: <%= link_to video.team.name, video.team %>
+        Has scored <%= video.points %> points with <%= video.watches %> watches since
+        <%= video.created_at.strftime("%b %e'%y") %>
+      <% else %>
+        <%= link_to "Free Agent", edit_team_video_path(@user_team, video) %>
+      <% end %>
+      <div>
+        <%= video.embed_html5.html_safe %>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 
 
