@@ -20,23 +20,6 @@ class VideosController < ApplicationController
     @user_team = current_user.team
   end
 
-  # def show
-  #   params[:id] = params[:id].join(',') if params[:id].class == Array
-  #   @videos = Video.find(params[:id])
-
-  #   @videos.each_with_index do |video, index|
-
-  #     if @video.team.present?
-  #       @on_team = @video.team
-  #       # If video isn't a free agent refresh the watches (data might be stale)
-  #       # If it's a free agent it was just created so no worries
-  #       @video.refresh_watches
-  #       # Update points (for now this updates for all time)
-  #     end
-  #     @user_team = current_user.team
-  #     @video.update_points
-  # end
-
   # new and create work to find make a single vid from yt_id and
 
   def new
@@ -78,7 +61,8 @@ class VideosController < ApplicationController
   def create_search
     # Return an array of video objects
     search_results = Video.make_search_vids(search_params)
-
+    id_list = search_results.each.map(&:id)
+    redirect_to video_path(id_list.join(','))
   end
 
   def edit

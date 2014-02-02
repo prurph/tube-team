@@ -6,22 +6,24 @@
   <%= link_to "Scout for players", new_video_path %>
 <% end %>
 Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
+
 <ul>
   <% if @videos.present? %>
     <% @videos.each do |video| %>
-      <li><%= link_to video.title, video %> has scored <%= video.points %>
-       points since joining your team on <%= video.created_at.strftime("%b %e'%y") %><br>
-       It has been watched <%= video.watches %> times since then.
-       Salary: <%= video.salary %>
+        <li>
+        <%= link_to video.title, video %> has scored <%= video.points %>
+         points since joining your team on <%= video.created_at.strftime("%b %e'%y") %><br>
+         It has been watched <%= video.watches %> times since then.
+         Salary: <%= video.salary %>
 
-      <% if @is_me %>
+        <% if @is_me %>
 
-          <!-- PROB REFACTOR THIS ISH AND PUT IT IN A HELPER? -->
-          <%= link_to "Release video", team_video_path(@team, video),
-          method: :delete, confirm: "This will release the video as a free agent. Confirm?" %>
+            <!-- PROB REFACTOR THIS ISH AND PUT IT IN A HELPER? -->
+            <%= link_to "Release video", team_video_path(@team, video),
+            method: :delete, confirm: "This will release the video as a free agent. Confirm?" %>
 
-      <% end %>
-      <%= link_to image_tag(video.thumbnail, alt: video.title), video %>
+        <% end %>
+        <%= link_to image_tag(video.thumbnail, alt: video.title), video %>
       </li>
     <% end %>
   <% end %>

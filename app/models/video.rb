@@ -35,15 +35,19 @@ class Video < ActiveRecord::Base
     # Run the search and return top 5 results
     videos = client.videos_by(query: search_term).videos.slice!(0,5)
     # Make an array of video objects from the API results
-    videos.map!{|video| Video.make_video(video.unique_id)}
+    videos.map! do |video|
+      vid_in_db = Video.find_by_yt_id(video.unique_id)
+      # If video already exists, use db entry, otherwise make a model from API data
+      video = vid_in_db.present? ? vid_in_db : Video.make_video(video.unique_id)
+    end
+    videos
   end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
-    updates = WatchUpdate.all(conditions:
-                              { created_at: (start_time..end_time),
-                                video_id: self.id })
+    updates = WatchUpdate.where(created_at: (start_time..end_time),
+                                video_id: self.id).to_a
 
-    updates.sort! {|update| update.watches }
+    updates.sort! {|x,y| y.watches <=> x.watches }
 
     # Short-circuit to assign add_watches to 0 if there are no watch_updates yet
     add_watches = (updates.blank? ? 0 : updates.first.watches - updates.last.watches)
@@ -63,10 +67,15 @@ class Video < ActiveRecord::Base
     # Update the watch count in the video entry itself to track watches since
     # joining the user's team
     self.update_attributes(watches: (new_data.view_count - self.initial_watches))
-    # And create a timestamped watch
-    update = WatchUpdate.create(attributes)
-    self.watch_updates << update
-    self.save
+
+    # Check to see if a watch with this # of views already exists
+    existing_update = self.watch_updates.where(video_id: self.id,
+                                               watches: new_data.view_count)
+    if existing_update.blank?
+      update = WatchUpdate.create(attributes)
+      self.watch_updates << update
+      self.save
+    end
   end
 
 end
