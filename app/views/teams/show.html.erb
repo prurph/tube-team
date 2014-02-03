@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row team-header">
-    <div class="col-sm-3">
+    <div class="col-xs-3">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-ribbon"><%= @team.user.username %></h3>
         </div>
-        <div class="panel-body">
+        <div class="bg-primary panel-body">
           <h2 class="big-text">HI</h2>
         </div>
         <div class="panel-footer">
@@ -13,19 +13,36 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-xs-6 middle-part">
       <div class="team-stats">
-        <h1 class="name-banner"><%= @team.name %></h1>
-        <h2>Playing Since: <%= @team.created_at.strftime("%b %e'%y") %></h2>
-        <h2>Total Views: <%= @team.watches %>
+        <h1 class="bg-primary name-banner"><%= @team.name %></h1>
+          <div class="team-stats">
+            <h3>Playing Since: <%= @team.created_at.strftime("%b %e '%y") %></h3>
+            <h3>Total Views: <%= @team.watches %></h3>
+          </div>
+      </div>
+      <div class="admin-panel">
+        <% if @is_me %>
+          <ul class="nav nav-pills nav-justified">
+            <li>
+              <%= link_to "Rename Team", edit_team_path %>
+            </li>
+            <li>
+              <%= link_to "Release Team", @team, method: :delete, data: { confirm:
+                'This will delete your team and release all your videos. Confirm?' } %>
+            </li>
+            <li>
+              <%= link_to "Scout players", new_video_path %>
+            </li>
+        <% end %>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-xs-3">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-ribbon">Points: <%= @team.points %></h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body bg-primary">
           <h2 class="big-text"><%= @rank %></h2>
         </div>
         <div class="panel-footer">

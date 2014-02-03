@@ -12,7 +12,7 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~>3.1.0'
 
 gem 'jquery-ui-rails'
 
