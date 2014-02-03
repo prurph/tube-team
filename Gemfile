@@ -11,11 +11,9 @@ gem 'pry'
 gem 'pg'
 
 # Use SCSS for stylesheets
-# gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.0'
+gem 'bootstrap-sass'
 
-gem 'therubyracer'
-gem 'less-rails-bootstrap'
-gem 'designmodo-flatuipro-rails', '~>1.2.4.0.branch'
 gem 'jquery-ui-rails'
 
 # Use Uglifier as compressor for JavaScript assets

@@ -1,6 +1,4 @@
 TubeTeam::Application.routes.draw do
-
-  get "flatuipro_demo/index"
   devise_for :users
 
   get 'videos/search' => 'videos#new_search'

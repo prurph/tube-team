@@ -33,12 +33,12 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
 
 <div class="container">
   <div class="row team-header">
-    <div class="col-sm-3" id="manager-panel">
-      <div class="alert alert-info">
-        <div class="panel-title">Manager</div>
-        <div class="panel-body">AVATAR</div>
-        <div class="panel-footer">@username</div>
+    <div class="col-sm-3 panel panel-default" id="manager-panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">MANAGER</h3>
       </div>
+      <div class="panel-body"><span class="glyphicon glyphicon-cog">AVATAR</span></div>
+      <div class="panel-footer">@username</div>
     </div>
     <div class="col-sm-6" id="team-panel">
       TEAM NAME
@@ -46,4 +46,12 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
     <div class="col-sm-3" id="rank-panel">
       Rank
     </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
 </div>
