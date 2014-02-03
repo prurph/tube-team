@@ -3,6 +3,7 @@ class VideosController < ApplicationController
 
   def show
     @videos = Video.find params[:id].split(',')
+    @videos.sort_by!(&:initial_watches).reverse!
 
     # If only one video stick it in an array so we can iterate over it too
     [@videos] if @videos.class == Video

@@ -43,7 +43,7 @@ class Video < ActiveRecord::Base
       # If video already exists, use db entry, otherwise make a model from API data
       video = vid_in_db.present? ? vid_in_db : Video.make_video(video.unique_id)
     end
-    videos.sort_by!(&:initial_watches)
+    videos
   end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
