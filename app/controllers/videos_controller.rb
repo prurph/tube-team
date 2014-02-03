@@ -65,8 +65,13 @@ class VideosController < ApplicationController
   end
 
   def create_search
+    if current_user.team.blank?
+      flash[:alert] = "Please create a team before scouting for players"
+      redirect_to new_team_path
+    end
     # Return an array of video objects
     search_results = Video.make_search_vids(search_params)
+    session[:search_term] = search_params
     id_list = search_results.each.map(&:id)
     redirect_to video_path(id_list.join(','))
   end

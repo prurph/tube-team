@@ -6,7 +6,7 @@
 <% end %>
 
 <h1>Or Search!</h1>
-<%= form_tag ({ action: 'new_search', controller: 'videos' }) do %>
+<%= form_tag({ action: 'create_search', controller: 'videos'}, method: :get) do %>
   <%= label_tag(:term, "Search for: ") %>
   <%= text_field_tag(:term) %>
   <%= submit_tag('Search') %>

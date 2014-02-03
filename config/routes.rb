@@ -1,8 +1,7 @@
 TubeTeam::Application.routes.draw do
   devise_for :users
 
-  get 'videos/search' => 'videos#new_search'
-  post 'videos/search' => 'videos#create_search'
+  get 'videos/search' => 'videos#create_search'
 
   resources :users
   resources :teams
