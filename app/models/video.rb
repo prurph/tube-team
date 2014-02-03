@@ -47,7 +47,7 @@ class Video < ActiveRecord::Base
   end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
-    updates = WatchUpdate.where(created_at: (end_time..start_time),
+    updates = WatchUpdate.where(created_at: (start_time..end_time),
                                 video_id: self.id)
 
     updates.sort_by!(&:watches)
