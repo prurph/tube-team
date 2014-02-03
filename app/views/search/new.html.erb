@@ -2,12 +2,12 @@
 <%= form_for @video do |form| %>
   <%= form.label :yt_id, "Youtube ID" %>
   <%= form.text_field :yt_id %>
-  <%= form.submit %>
+  <%= form.submit('Find by ID') %>
 <% end %>
 
 <h1>Or Search!</h1>
-<%= form_tag({ action: 'create_search', controller: 'videos'}, method: :get) do %>
-  <%= label_tag(:term, "Search for: ") %>
-  <%= text_field_tag(:term) %>
+<%= form_tag({ action: 'create_many', controller: 'videos'}) do %>
+  <%= label_tag(:search_term, "Search for: ") %>
+  <%= text_field_tag(:search_term) %>
   <%= submit_tag('Search') %>
 <% end %>

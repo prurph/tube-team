@@ -21,57 +21,19 @@ class VideosController < ApplicationController
     @user_team = current_user.team
   end
 
-  # new and create work to find make a single vid from yt_id and
-
-  def new
-    if current_user.team.present?
-      @video = Video.new
-    else
-      flash[:alert] = "Please create a team before scouting for players"
-      return redirect_to new_team_path
-    end
-
-    if current_user.team.videos.length >= 5
-      flash[:alert] = "Teams have a maximum of 5 players."
-      redirect_to current_user.team
-    end
-  end
-
   def create
-    begin
-    # Redirect away if video already exists (#show will determine if it's on a team)
-      exists = Video.find_by_yt_id(video_params[:yt_id])
-
-      if exists
-        return redirect_to exists
-      else
-      # Get info from API to make the video
-        new_video = Video.make_video(video_params[:yt_id])
-        redirect_to new_video
-      end
-
-    rescue OpenURI::HTTPError
-      flash[:alert] = "Invalid YouTube ID"
-      redirect_to :back
+    exists = Video.find_by_yt_id(video_params[:yt_id])
+    if exists
+      return redirect_to exists
+    else
+      new_video = Video.make_video(video_params[:yt_id])
+      redirect_to new_video
     end
   end
 
-  # new_search and create_search handle generic search terms (return 5 videos)
-  def new_search
-    if current_user.team.blank?
-      flash[:alert] = "Please create a team before scouting for players"
-      redirect_to new_team_path
-    end
-  end
-
-  def create_search
-    if current_user.team.blank?
-      flash[:alert] = "Please create a team before scouting for players"
-      redirect_to new_team_path
-    end
-    # Return an array of video objects
-    search_results = Video.make_search_vids(search_params)
-    session[:search_term] = search_params
+  def create_many
+    session[:search_term] = params[:search_term]
+    search_results = Video.make_search_vids(params[:search_term])
     id_list = search_results.each.map(&:id)
     redirect_to video_path(id_list.join(','))
   end
@@ -94,7 +56,7 @@ class VideosController < ApplicationController
       return redirect_to :back
     elsif exceed_cap(video.salary)
       flash[:alert] = "Insufficient funds!"
-      return redirect_to new_video_path
+      return redirect_to :back
     end
 
     # Otherwise sign the video to the team
@@ -134,23 +96,7 @@ class VideosController < ApplicationController
     params.require(:video).permit(:yt_id)
   end
 
-  def search_params
-    params.require(:term)
-  end
-
   def exceed_cap(vidsalary)
     current_user.team.bankroll < vidsalary
   end
 end
-
-# Video Schema
-#     t.integer  "salary"
-#     t.integer  "initial_watches"
-#     t.integer  "watches"
-#     t.string   "yt_id"
-#     t.string   "description"
-#     t.datetime "uploaded_at"
-#     t.string   "author"
-#     t.string   "embed_html5"
-#     t.integer  "team_id"
-#     t.string   "title"

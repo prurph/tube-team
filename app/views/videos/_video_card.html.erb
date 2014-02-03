@@ -10,8 +10,7 @@
           <% elsif video.team == user_team %> <%# If on user_team put drop link %>
             <%= link_to image_tag("trash@2x.png", size: "40x40", alt: "Release Player"),
                         team_video_path(team_id: user_team.id, id: video.id),
-                        method: :delete, data: { confirm: "This will drop
-                        #{video.title} from your team immediately. Confirm?" } %>
+                        method: :delete, data: { confirm: "This will drop #{video.title.truncate(30)} from your team immediately. Confirm?" } %>
           <% end %>
         </div>
       </div>

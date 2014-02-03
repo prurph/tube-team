@@ -1,11 +1,13 @@
 TubeTeam::Application.routes.draw do
   devise_for :users
 
-  get 'videos/search' => 'videos#create_search'
+  get 'search/new' => 'search#new'
+  post 'search/new' => 'videos#create_many'
+
 
   resources :users
   resources :teams
-  resources :videos
+  resources :videos, only: [:create, :create_many, :show]
 
   resources :teams do
     resources :videos, only: [:edit, :update, :destroy]
