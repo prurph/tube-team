@@ -17,6 +17,7 @@ class TeamsController < ApplicationController
         video.update_points
       end
       @team.update_points
+      @team.update_watches
     end
     @rank = @team.get_rank
   end

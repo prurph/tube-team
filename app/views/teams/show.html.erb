@@ -1,3 +1,44 @@
+<div class="container">
+  <div class="row team-header">
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-ribbon"><%= @team.user.username %></h3>
+        </div>
+        <div class="panel-body">
+          <h2 class="big-text">HI</h2>
+        </div>
+        <div class="panel-footer">
+          <h3 class="panel-ribbon">MANAGER</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="team-stats">
+        <h1 class="name-banner"><%= @team.name %></h1>
+        <h2>Playing Since: <%= @team.created_at.strftime("%b %e'%y") %></h2>
+        <h2>Total Views: <%= @team.watches %>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-ribbon">Points: <%= @team.points %></h3>
+        </div>
+        <div class="panel-body">
+          <h2 class="big-text"><%= @rank %></h2>
+        </div>
+        <div class="panel-footer">
+          <h3 class="panel-ribbon">RANK</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <h1>team show</h1>
 <% if @is_me %>
   <%= link_to "Rename Team", edit_team_path %>
@@ -30,28 +71,3 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
     <% end %>
   <% end %>
 </ul>
-
-<div class="container">
-  <div class="row team-header">
-    <div class="col-sm-3 panel panel-default" id="manager-panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">MANAGER</h3>
-      </div>
-      <div class="panel-body"><span class="glyphicon glyphicon-cog">AVATAR</span></div>
-      <div class="panel-footer">@username</div>
-    </div>
-    <div class="col-sm-6" id="team-panel">
-      TEAM NAME
-    </div>
-    <div class="col-sm-3" id="rank-panel">
-      Rank
-    </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
-  </div>
-  <div class="panel-body">
-    Panel content
-  </div>
-</div>

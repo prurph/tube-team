@@ -19,6 +19,12 @@ class Team < ActiveRecord::Base
     # This is probably not a good idea to do every time someone loads a team
     # later create a ranking field for users and run a rake task to update it
     # periodically
-    Team.all.order(:points).index(self)
+    Team.all.order(points: :desc).index(self) + 1
   end
+
+  def update_watches
+    tot_watches = self.videos.inject(0) { |sum, el| sum += el.watches }
+    self.update_attributes(watches: tot_watches)
+  end
+
 end
