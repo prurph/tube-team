@@ -25,25 +25,30 @@
 //   padding-right: 0;
 // }
 
-// a {
-//   text-decoration: none;
-// }
+a {
+  text-decoration: none;
+}
 
-.tt-thumbnail {
-  height: 250px;
+.tt-video {
+  height: 245px;
+  width: 265px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 2px;
 }
 
+.video-player {
+  padding-right: 22px; /* jedi-stuff to center player */
+}
+
 .tt-card-outer {
   position: relative;
   display: inline-block;
   float: left;
-  margin: 10px;
-  width: 275px;
-  height: 465px;
+  margin: 7px;
+  width: 285px;
+  height: 455px;
   transition: box-shadow 0.2s ease;
   // &:hover {
   //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
@@ -53,26 +58,27 @@
 }
 
 .tt-card-inner {
-  width: 265px;
-  height: 455px;
+  width: 275px;
+  height: 445px;
   margin: 4px auto;
   border-radius: 3px;
   background-color: rgba(215,235,255,0.6);
 }
 
-.tt-rel-btn, .tt-sign-btn {
+.tt-signrel-btn {
   position: absolute;
   top: 9px;
   left: 9px;
   z-index: 5;
-  transition: all 0.3s ease;
-  opacity: 0.9;
+  transition: all 0.2s ease;
+  transform-origin: 50% 50%;
   &:hover {
-    opacity: 1.0;
+    -moz-transform: scale(1.1), rotate(-10deg);
+    -webkit-transform: scale(1.1) rotate(-10deg);
+    transform: scale(1.1) rotate(-10deg);
   }
 }
 
-.tt-rel-btn {
-  text-align: right;
-  right: 9px;
+.card-table {
+  margin-top: 5px;
 }

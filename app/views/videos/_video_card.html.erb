@@ -1,28 +1,27 @@
 <% videos.each do |video| %>
   <div class="panel panel-default tt-card-outer">
     <div class="panel-body tt-card-inner">
-      <div class="tt-thumbnail" style="background-image: url('<%= video.thumbnail %>')">
-        <% if video.team.blank? %> <%# If no team put up sign link %>
-          <div class="tt-sign-btn">
-            <%= link_to image_tag("check@2x.png", size: "32x32", alt: "Sign Player"),
+      <div class="tt-video">
+        <%= video.embed_html5.html_safe %>
+        <div class="tt-signrel-btn">
+          <% if video.team.blank? %> <%# If no team put up sign link %>
+            <%= link_to image_tag("check@2x.png", size: "40x40", alt: "Sign Player"),
                   edit_team_video_path(team_id: user_team, id: video) %>
-          </div>
-        <% elsif video.team == user_team %> <%# If on user_team put drop link %>
-          <div class="tt-rel-btn">
-            <%= link_to image_tag("trash@2x.png", size: "32x32", alt: "Release Player"),
+          <% elsif video.team == user_team %> <%# If on user_team put drop link %>
+            <%= link_to image_tag("trash@2x.png", size: "40x40", alt: "Release Player"),
                         team_video_path(team_id: user_team.id, id: video.id),
                         method: :delete, data: { confirm: "This will drop
                         #{video.title} from your team immediately. Confirm?" } %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
 
       <div class="tt-vid-stats">
-        <table class="table table-hover table-condensed">
+        <table class="table table-hover table-condensed card-table">
           <thead class="tt-stats-table">
             <tr>
               <th colspan="2"><div class="glyphicon glyphicon-star"></div>
-              <%= video.title %></th>
+              <%= video.title.truncate(75) %></th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +31,8 @@
               </tr>
             <tr>
               <td>Team</td>
-              <td><%= video.team ? video.team.name : "Free Agent" %></td>
+              <td><%= video.team ? (link_to video.team.name, video.team)
+                                   : "Free Agent" %></td>
             </tr>
             <% if video.team %>
               <tr>

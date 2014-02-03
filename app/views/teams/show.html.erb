@@ -78,7 +78,7 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
 
         <% if @is_me %>
 
-            <!-- PROB REFACTOR THIS ISH AND PUT IT IN A HELPER? -->
+            PROB REFACTOR THIS ISH AND PUT IT IN A HELPER?
             <%= link_to "Release video", team_video_path(@team, video),
             method: :delete, confirm: "This will release the video as a free agent. Confirm?" %>
 
@@ -88,3 +88,4 @@ Team Bankroll: <%= @team.bankroll %> Total Team Salary: <%= @team.salary %>
     <% end %>
   <% end %>
 </ul>
+
