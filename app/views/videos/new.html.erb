@@ -1,5 +1,13 @@
+<h1>Paste a youtube id in here!</h1>
 <%= form_for @video do |form| %>
   <%= form.label :yt_id, "Youtube ID" %>
   <%= form.text_field :yt_id %>
   <%= form.submit %>
+<% end %>
+
+<h1>Or Search!</h1>
+<%= form_tag ({ action: 'new_search', controller: 'videos' }) do %>
+  <%= label_tag(:term, "Search for: ") %>
+  <%= text_field_tag(:term) %>
+  <%= submit_tag('Search') %>
 <% end %>

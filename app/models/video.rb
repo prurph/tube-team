@@ -17,8 +17,8 @@ class Video < ActiveRecord::Base
                                                 height: '350',
                                                 frameborder: '0'}),
                 description: video.description,
-                # Get the largest thumbnail available by sorting on height
-                thumbnail: video.thumbnails.sort_by { |tn| tn.height }.last.url
+                # Get a thumbnail that's not a shitty lq one
+                thumbnail: video.thumbnails.find { |tn| tn.height >= 180 }.url
                 }
     custom_attr = { salary: api_attr[:initial_watches],
                             watches: 0,

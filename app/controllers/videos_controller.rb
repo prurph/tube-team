@@ -25,12 +25,14 @@ class VideosController < ApplicationController
   def new
     if current_user.team.present?
       @video = Video.new
-    elsif current_user.team.videos.length >= 5
-      flash[:alert] = "Teams have a maximum of 5 players."
-      return redirect_to team_video_path(current_user.team.id)
     else
       flash[:alert] = "Please create a team before scouting for players"
-      redirect_to new_team_path
+      return redirect_to new_team_path
+    end
+
+    if current_user.team.videos.length >= 5
+      flash[:alert] = "Teams have a maximum of 5 players."
+      redirect_to current_user.team
     end
   end
 
@@ -44,7 +46,7 @@ class VideosController < ApplicationController
       else
       # Get info from API to make the video
         new_video = Video.make_video(video_params[:yt_id])
-        redirect_to :index
+        redirect_to new_video
       end
 
     rescue OpenURI::HTTPError
@@ -86,7 +88,7 @@ class VideosController < ApplicationController
       return redirect_to :back
     elsif exceed_cap(video.salary)
       flash[:alert] = "Insufficient funds!"
-      return redirect_to :back
+      return redirect_to new_video_path
     end
 
     # Otherwise sign the video to the team
