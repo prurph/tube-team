@@ -39,7 +39,11 @@
 
 .tt-card-outer {
   position: relative;
-  max-width: 275px;
+  display: inline-block;
+  float: left;
+  margin: 10px;
+  width: 275px;
+  height: 465px;
   transition: box-shadow 0.2s ease;
   // &:hover {
   //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
@@ -49,22 +53,26 @@
 }
 
 .tt-card-inner {
-  max-width: 265px;
+  width: 265px;
+  height: 455px;
   margin: 4px auto;
   border-radius: 3px;
   background-color: rgba(215,235,255,0.6);
 }
 
-.tt-rel-sign-btns {
+.tt-rel-btn, .tt-sign-btn {
   position: absolute;
   top: 9px;
   left: 9px;
   z-index: 5;
-  border-radius: 50%;
   transition: all 0.3s ease;
+  opacity: 0.9;
   &:hover {
-    -moz-box-shadow: 0px 0px 2px 2px rgb(255,230,89);
-    -webkit-box-shadow: 0px 0px 2px 2px rgb(255,230,89);
-    box-shadow: 0px 0px 2px 2px rgb(255,230,89);
+    opacity: 1.0;
   }
+}
+
+.tt-rel-btn {
+  text-align: right;
+  right: 9px;
 }

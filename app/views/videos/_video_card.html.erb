@@ -1,0 +1,52 @@
+<% videos.each do |video| %>
+  <div class="panel panel-default tt-card-outer">
+    <div class="panel-body tt-card-inner">
+      <div class="tt-thumbnail" style="background-image: url('<%= video.thumbnail %>')">
+        <% if video.team.blank? %> <%# If no team put up sign link %>
+          <div class="tt-sign-btn">
+            <%= link_to image_tag("check@2x.png", size: "32x32", alt: "Sign Player"),
+                  edit_team_video_path(team_id: user_team, id: video) %>
+          </div>
+        <% elsif video.team == user_team %> <%# If on user_team put drop link %>
+          <div class="tt-rel-btn">
+            <%= link_to image_tag("trash@2x.png", size: "32x32", alt: "Release Player"),
+                        team_video_path(team_id: user_team.id, id: video.id),
+                        method: :delete, data: { confirm: "This will drop
+                        #{video.title} from your team immediately. Confirm?" } %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tt-vid-stats">
+        <table class="table table-hover table-condensed">
+          <thead class="tt-stats-table">
+            <tr>
+              <th colspan="2"><div class="glyphicon glyphicon-star"></div>
+              <%= video.title %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>Views</td>
+                <td><%= video.initial_watches + video.watches %></td>
+              </tr>
+            <tr>
+              <td>Team</td>
+              <td><%= video.team ? video.team.name : "Free Agent" %></td>
+            </tr>
+            <% if video.team %>
+              <tr>
+                <td>Joined</td>
+                <td><%= video.team.created_at.strftime("%b %e '%y") %></td>
+              </tr>
+              <tr>
+                <td>Points</td>
+                <td><%= video.points %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
