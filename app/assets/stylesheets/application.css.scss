@@ -1,28 +1,38 @@
 @import 'bootstrap';
 @import "flat-ui";
 
-.big-text {
-  margin: 0 auto;
-  text-align: center;
-  font-size: 8rem;
+// Older Stuff
+
+// .big-text {
+//   margin: 0 auto;
+//   text-align: center;
+//   font-size: 8rem;
+// }
+
+// .panel-ribbon {
+//   margin-top: 0;
+//   margin-bottom: 0;
+// }
+
+// .name-banner {
+//   margin-top: 2rem;
+//   text-align: center;
+//   font-size: 4rem;
+// }
+
+// .middle-part {
+//   padding-left: 0;
+//   padding-right: 0;
+// }
+
+// a {
+//   text-decoration: none;
+// }
+
+.tt-card {
+  position: relative;
 }
 
-.panel-ribbon {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.name-banner {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 4rem;
-}
-
-.middle-part {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-a {
-  text-decoration: none;
+.tt-rel.sign-btns {
+  position: absolute;
 }
