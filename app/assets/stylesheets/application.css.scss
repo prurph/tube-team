@@ -29,10 +29,42 @@
 //   text-decoration: none;
 // }
 
-.tt-card {
-  position: relative;
+.tt-thumbnail {
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 2px;
 }
 
-.tt-rel.sign-btns {
+.tt-card-outer {
+  position: relative;
+  max-width: 275px;
+  transition: box-shadow 0.2s ease;
+  // &:hover {
+  //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
+  //   -webkit-box-shadow: 0px 0px 2px 2px #ccc;
+  //   box-shadow: 0px 0px 2px 2px #ccc;
+  // }
+}
+
+.tt-card-inner {
+  max-width: 265px;
+  margin: 4px auto;
+  border-radius: 3px;
+  background-color: rgba(215,235,255,0.6);
+}
+
+.tt-rel-sign-btns {
   position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 5;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  &:hover {
+    -moz-box-shadow: 0px 0px 2px 2px rgb(255,230,89);
+    -webkit-box-shadow: 0px 0px 2px 2px rgb(255,230,89);
+    box-shadow: 0px 0px 2px 2px rgb(255,230,89);
+  }
 }

@@ -1,12 +1,15 @@
 <h1>Testing</h1>
 
-<div class="container">
-  <div class="tt-card">
-    <div class="tt-rel-sign-btns">
-      SIGN/RELEASE
-    </div>
-    <div class="tt-thumbnail">
-      THUMBNAIL GOES HERE with class=img-thumbnail
+<div class="panel panel-default tt-card-outer">
+  <div class="panel-body tt-card-inner">
+    <div class="tt-thumbnail" style="background-image: url('<%= current_user.
+      team.videos[1].thumbnail %>')">
+      <div class="tt-rel-sign-btns">
+        <%= link_to image_tag("trash@2x.png", size: "32x32", alt: "Release Player"),
+        team_video_path(team_id: current_user.team, id: current_user.team.videos[1].id), method: :delete,
+        data: {confirm: "This will drop [VIDEONAME] from your team immediately. Confirm?"} %>
+      </div>
+      <%#= image_tag(current_user.team.videos.first.thumbnail, width: "100%") %>
     </div>
     <div class="tt-vid-stats">
       <table class="table table-hover table-condensed">
