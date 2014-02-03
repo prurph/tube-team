@@ -9,7 +9,7 @@ class Team < ActiveRecord::Base
     to_add = 0
 
     self.videos.each do |video|
-      video.update_points(end_time, start_time)
+      video.update_points(start_time, end_time)
       to_add += video.points
     end
     self.update_attributes(points: to_add)
