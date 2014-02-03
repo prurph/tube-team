@@ -24,7 +24,6 @@ class Team < ActiveRecord::Base
 
   def update_watches
     tot_watches = self.videos.inject(0) { |sum, el| sum += el.watches }
-    binding.pry
     self.update_attributes(watches: tot_watches)
   end
 
