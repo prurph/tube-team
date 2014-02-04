@@ -1,8 +1,3 @@
-<h1>Teams Index</h1>
-<ul>
-  <% @teams.each_with_index do |team, rank| %>
-  <li>
-    Rank: <%= (rank+1).ordinalize %> <%= link_to team.name, team %> Points: <%= team.points %>
-  </li>
-  <% end %>
-</ul>
+<%= render partial: 'teams/team_bar', locals: { teams: @teams } %>
+
+<!-- use each_with_index and ordinalize to get rank -->

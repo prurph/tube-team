@@ -11,10 +11,10 @@ class VideosController < ApplicationController
     @videos.each do |video|
       if video.team.present?
         # If video isn't a free agent refresh the watches (data might be stale)
-        # If it's a free agent it was just created so no worries
+        # If it's a free agent it was just created so don't waste the API call
         video.refresh_watches
       end
-      # Update points (for now this updates for all time)
+      # Update points (this can later take datetime ranges for season purposes)
       video.update_points
     end
 

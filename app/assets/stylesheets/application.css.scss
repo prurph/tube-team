@@ -25,6 +25,8 @@
 //   padding-right: 0;
 // }
 
+/* _video_card.html.erb */
+
 a {
   text-decoration: none;
 }
@@ -79,6 +81,128 @@ a {
   }
 }
 
-.card-table {
+.tt-card-table {
   margin-top: 5px;
+}
+
+/* _team_bar.html.erb */
+
+.tt-team-outer {
+  width: 90%;
+  min-width: 600px;
+  max-width: 1000px;
+  height: 200px;
+  margin: 3px auto;
+  position: relative;
+    // css hack for inset background
+    // &:before {
+    border-radius: 3px;
+    //background-color: rgba(215,235,255,0.6);
+  //   -moz-transform: scale(0.9);
+  //   -webkit-transform: scaleX(0.98) scaleY(0.93);
+  //   transform: scale(0.9);
+  //   // -moz-transform-origin: middle middle;
+  //   // -webkit-transform-origin: middle middle;
+  //   // transform-origin: middle middle;
+  //   position: absolute;
+  //   content: '';
+  //   top: 0;
+  //   left: 0;
+  //   height: 200px;
+  //   width: 100%;
+  //   z-index: 1;
+  // }
+}
+
+.tt-team-inner {
+  height: 100%;
+  margin: 0;
+  padding: 5px;
+  // css hack for inset background
+    &:before {
+    border-radius: 3px;
+    background-color: #BDC3C7;
+    -moz-transform: scale(0.9);
+    -webkit-transform: scaleX(0.98) scaleY(0.93);
+    transform: scale(0.9);
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 100%;
+  }
+}
+
+.tt-admin-panel, .tt-nonadmin-panel {
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 100%;
+  width: 90px;
+  z-index: 5;
+  padding-top: 4px;
+  background-color: #F1C40F;
+  border-radius: 3px;
+  -moz-background-clip: border-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  text-align: center;
+  img {
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ECF0F1;
+    border-radius: 3px;
+    margin: 2px;
+    &:hover {
+    -moz-transform: scale(1.1), rotate(-10deg);
+    -webkit-transform: scale(1.1) rotate(-10deg);
+    transform: scale(1.1) rotate(-10deg);
+    box-shadow: 0 0 1px 2px #7F8C8D;
+    z-index: 10
+    }
+  }
+}
+
+.tt-rank-panel {
+  margin-right: 20px;
+  width: 125px;
+  float: left;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  height: 100%;
+}
+
+.big {
+  padding-left: 5px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 60px;
+  text-align: center;
+}
+
+.center {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  margin: auto;
+  z-index: 5;
+  /* for horiz left-align, try "margin: auto auto auto 0" */
+}
+
+
+
+.tt-nonadmin-panel {
+  background-color: #D35400;
+}
+
+.tt-main-team {
+  display: inline-block;
+  width: 400px;
+  position: relative;
+  z-index: 5;
+}
+
+.tt-team-stats {
+  margin-top: 25px;
 }

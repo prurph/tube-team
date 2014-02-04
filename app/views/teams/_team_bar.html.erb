@@ -1,0 +1,54 @@
+<% teams.each_with_index do |team, rank| %>
+  <div class="tt-team-outer">
+    <% if team.user == current_user %>
+      <div class="tt-admin-panel">
+        <%= link_to image_tag("Pensils@2x.png", size: "60x60", alt: "Rename Team",
+            class: 'tt-admin-img', title: "Rename Team"),
+            team_path(id: team.id), method: :update %>
+        <%= link_to image_tag("trash@2x.png", size: "60x60", alt: "Release Team",
+            class: 'tt-admin-img', title: "Release Team"),
+            team_path(id: team.id), method: :delete, data: { confirm: "This will drop #{team.name.truncate(30)} and all its videos immediately. Confirm?" } %>
+        <%= link_to image_tag("Search@2x.png", size: "60x60", alt: "Scout for Players",
+            class: 'tt-admin-img', title: "Find Players"),
+            search_new_path %>
+      </div>
+    <% else %>
+      <div class="tt-nonadmin-panel">
+      </div>
+    <% end %>
+    <div class="tt-rank-panel">
+      <div class="big center"><%= (rank + 1).ordinalize %></div>
+    </div>
+    <div class="tt-team-inner">
+      <div class="tt-main-team">
+        <div class="tt-team-splash">
+          <h1><%= link_to team.name, team %></h1>
+        </div>
+        <div class="tt-team-stats">
+          <table class="table table-hover table-condensed tt-team-table">
+            <tbody>
+              <tr>
+                <td>Playing Since</td>
+                <td><%= team.created_at.strftime("%b %e / %Y") %></td>
+              </tr>
+              <tr>
+                <td>Manager</td>
+                <td><%= link_to team.user.username, team.user %></td>
+              </tr>
+              <tr>
+                <td>Total Views</td>
+                <td><%= team.watches %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tt-video-thumbs">
+        <% unless team.videos.empty? %>
+          <% team.videos.each do |video| %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
