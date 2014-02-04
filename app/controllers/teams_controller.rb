@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   def index
     # Return these in ranked order so we can display rankings
-    @teams = Team.all.order(points: :desc)
+    @teams = Team.all_sorted_by_point_total
     @teams.each do |team|
       team.update_points
       team.update_watches

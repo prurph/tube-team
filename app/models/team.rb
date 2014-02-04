@@ -4,6 +4,11 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :user_id, presence: true, uniqueness: true
+  scope :all_sorted_by_point_total, order('points  + past_points DESC')
+
+  def points_total
+    self.points + self.past_points
+  end
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
     tot_points = 0

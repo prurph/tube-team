@@ -80,18 +80,25 @@ class VideosController < ApplicationController
       return redirect_to team
     end
 
-    if video.destroy
-      flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
+    run_cleanup(video)
+    video.destroy
+    flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
                         in funds!"
-      team.update_attributes(bankroll: (team.bankroll + video.salary),
-                             salary:   (team.salary - video.salary))
-      redirect_to team
-    else
-      flash[:alert] = video.errors.full_messages.join(', ')
-    end
+    redirect_to team
   end
 
   private
+
+  def run_cleanup(video)
+    ActiveRecord::Base.transaction do
+      video.refresh_watches
+      video.update_points
+      video.team.update_attributes(bankroll: (video.team.bankroll + video.salary),
+                             salary:   (video.team.salary - video.salary),
+                             past_points: (video.team.past_points += video.points)
+                            )
+    end
+  end
 
   def video_params
     params.require(:video).permit(:yt_id)
