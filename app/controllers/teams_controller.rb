@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
 
   def new
     if current_user.team.present?
-      flash[:alert] = "One team per user. Must delete current team first."
+      flash[:alert] = "One team per user. Must release current team first."
       redirect_to action: :show
     else
       @team = Team.new
@@ -57,7 +57,7 @@ class TeamsController < ApplicationController
   def update
     team = Team.find(params[:id])
     if current_user.id != team.user_id
-      flash[:notice] = "You're not the manager of #{team.name}"
+      flash[:notice] = "You're not the manager of #{team.name}!"
       return redirect_to team
     else
       team.update_attributes(team_params)

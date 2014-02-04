@@ -35,6 +35,7 @@ class VideosController < ApplicationController
     session[:search_term] = params[:search_term]
     search_results = Video.make_search_vids(params[:search_term])
     id_list = search_results.each.map(&:id)
+    session[:vid_ids] = id_list
     redirect_to video_path(id_list.join(','))
   end
 
@@ -51,12 +52,12 @@ class VideosController < ApplicationController
     # or not enough money to sign
 
     if current_user.team.id != team.id
-      flash[:alert] = "You are not the manager of this team."
-      # Do I need a return here? (Any chance other block executes?)
-      return redirect_to :back
+      flash[:alert] = "You are not the manager of #{team.name}!"
+      # Confused on when I need explicit returns with redirect_to and render
+      return redirect_to team_path(team)
     elsif exceed_cap(video.salary)
-      flash[:alert] = "Insufficient funds!"
-      return redirect_to :back
+      flash[:alert] = "Insufficient funds! Find a cheaper player!"
+      return redirect_to video
     end
 
     # Otherwise sign the video to the team
