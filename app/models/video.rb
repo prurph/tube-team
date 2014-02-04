@@ -13,7 +13,7 @@ class Video < ActiveRecord::Base
                 author: video.author.name,
                 uploaded_at: video.uploaded_at,
                 embed_html5: video.embed_html5({class: 'video-player',
-                                                width: '265', # Fits cards
+                                                width: '285', # Fits cards
                                                 height: '245',
                                                 frameborder: '0'}),
                 description: video.description,

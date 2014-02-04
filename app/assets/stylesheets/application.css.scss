@@ -9,63 +9,7 @@ a {
 }
 
 a:hover {
-  color: #2980B9;
-}
-
-/* _video_card.html.erb (Videos#Show) */
-
-.tt-video {
-  height: 245px;
-  width: 265px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 2px;
-}
-
-.video-player {
-  padding-right: 22px; /* jedi-stuff to center player */
-}
-
-.tt-card-outer {
-  position: relative;
-  display: inline-block;
-  float: left;
-  margin: 7px;
-  width: 285px;
-  height: 455px;
-  // transition: box-shadow 0.2s ease;
-  // &:hover {
-  //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
-  //   -webkit-box-shadow: 0px 0px 2px 2px #ccc;
-  //   box-shadow: 0px 0px 2px 2px #ccc;
-  // }
-}
-
-.tt-card-inner {
-  width: 275px;
-  height: 445px;
-  margin: 4px auto;
-  border-radius: 3px;
-  background-color: rgba(215,235,255,0.6);
-}
-
-.tt-signrel-btn {
-  position: absolute;
-  top: 9px;
-  left: 9px;
-  z-index: 5;
-  transition: all 0.2s ease;
-  transform-origin: 50% 50%;
-  &:hover {
-    -moz-transform: scale(1.1), rotate(-10deg);
-    -webkit-transform: scale(1.1) rotate(-10deg);
-    transform: scale(1.1) rotate(-10deg);
-  }
-}
-
-.tt-card-table {
-  margin-top: 5px;
+  color: #8E44AD;
 }
 
 /* _team_bar.html.erb (Teams#Index) */
@@ -181,7 +125,7 @@ a:hover {
   width: 40%;
   min-width: 450px;
   position: relative;
-  bottom: 5px;
+  bottom: 0px;
   z-index: 5;
 }
 
@@ -235,7 +179,7 @@ a:hover {
   width: 60%;
   min-width: 450px;
   position: relative;
-  bottom: 15px;
+  bottom: 5px;
   left: -15px;
   z-index: 5;
 }
@@ -271,4 +215,71 @@ a:hover {
     z-index: 10
     }
   }
+}
+
+/* (_my)_video_card.html.erb Video#show */
+
+.video-card-list {
+  position: relative;
+  margin: 0 auto;
+}
+
+.tt-card-inner {
+  width: 285px;
+  height: 435px;
+  margin: 4px auto;
+  border-radius: 3px;
+  background-color: #BDC3C7;
+  z-axis: 5;
+  &.me {
+    background-color: #F1C40F;
+  }
+}
+
+.tt-card-outer {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin: 5px;
+  width: 295px;
+  height: 445px;
+  background-color: #34495E;
+  border-radius: 3px;
+  &.me {
+    background-color: #F39C12;
+  }
+  // transition: box-shadow 0.2s ease;
+  // &:hover {
+  //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
+  //   -webkit-box-shadow: 0px 0px 2px 2px #ccc;
+  //   box-shadow: 0px 0px 2px 2px #ccc;
+  // }
+}
+
+.tt-video {
+  position: relative;
+}
+
+.tt-signrel-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  background-color: #ECF0F1;
+  border-radius: 2px 0 2px 2px;
+  // transition: all 0.2s ease;
+  &:hover {
+    -moz-transform: scale(1.1), rotate(10deg);
+    -webkit-transform: scale(1.1) rotate(10deg);
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 0 1px 2px #2980B9;
+    border-radius: 2px;
+  }
+  img {
+    margin: 1px 2px;
+  }
+}
+
+.tt-card-table {
+  margin-top: 5px;
 }

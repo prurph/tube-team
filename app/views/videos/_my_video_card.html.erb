@@ -1,13 +1,16 @@
-<div class="tt-card-outer">
-  <div class="tt-card-inner">
+<div class="tt-card-outer me">
+  <div class="tt-card-inner me center">
     <div class="tt-video">
       <%= video.embed_html5.html_safe %>
       <div class="tt-signrel-btn">
-        <% if video.team.blank? %> <%# If no team put up sign link %>
-          <%= link_to image_tag("check@2x.png", size: "40x40", alt: "Sign Player",
-              title: "Sign player to your team"),
-                edit_team_video_path(team_id: current_user.team, id: video) %>
-        <% end %>
+        <%= link_to image_tag("trash@2x.png", size: "40x40", alt: "Release Player",
+            title: "Release player from your team" ),
+            team_video_path(team_id: current_user.team.id, id: video.id),
+            method: :delete, data: {
+            confirm: "This will drop #{video.title.truncate(30)}
+            from your team immediately. Confirm?",
+            }
+        %>
       </div>
     </div>
 
@@ -44,3 +47,4 @@
     </div>
   </div>
 </div>
+
