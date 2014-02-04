@@ -80,6 +80,8 @@ class VideosController < ApplicationController
       return redirect_to team
     end
 
+    # run_cleanup handles adding video's points to past_points so teams can
+    # track points from videos that they have destroyed
     run_cleanup(video)
     video.destroy
     flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}

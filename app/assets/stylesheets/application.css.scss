@@ -129,7 +129,6 @@ a:hover {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
-  z-index: 5;
 }
 
 .tt-main-team {
@@ -267,28 +266,52 @@ a:hover {
   &.me {
     background-color: #F39C12;
   }
-  // transition: box-shadow 0.2s ease;
-  // &:hover {
-  //   -moz-box-shadow: 0px 0px 2px 2px #ccc;
-  //   -webkit-box-shadow: 0px 0px 2px 2px #ccc;
-  //   box-shadow: 0px 0px 2px 2px #ccc;
-  // }
 }
 
-.tt-video {
+/* If time rework these into smaller cards for team page */
+// .tt-card-inner {
+//   width: 290px;
+//   height: 190px;
+//   margin: 4px auto;
+//   border-radius: 3px;
+//   background-color: #BDC3C7;
+//   &.me {
+//     background-color: #F1C40F;
+//   }
+// }
+
+// .tt-card-outer {
+//   position: relative;
+//   float: left;
+//   margin: 5px;
+//   width: 300px;
+//   height: 200px;
+//   background-color: #34495E;
+//   border-radius: 3px;
+//   &.me {
+//     background-color: #F39C12;
+//   }
+// }
+
+.tt-vid-stats {
   position: relative;
 }
 
-// .tt-vid-stats {
-//   overflow-y: auto;
-//   overflow-x: hidden;
-// }
+.card-table {
+  width: 280px;
+  margin: 0 auto;
+}
+
+#tt-th {
+  vertical-align: middle;
+  height: 60px;
+}
 
 .tt-signrel-btn {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 5;
+  z-index: 15;
   background-color: #ECF0F1;
   border-radius: 2px 0 2px 2px;
   // transition: all 0.2s ease;
@@ -304,6 +327,43 @@ a:hover {
   }
 }
 
-// .tt-card-table {
-//   margin-top: 5px;
-// }
+/* index.html.erb */
+
+.tt-user-outer {
+  display: inline-block;
+  width: 445px;
+  height: 255px;
+  margin: 4px auto;
+  border-radius: 3px;
+  background-color: #BDC3C7;
+  z-axis: 5;
+  margin: 3px;
+  &.me {
+    background-color: #F1C40F;
+  }
+}
+
+.tt-user-inner {
+  position: relative;
+  float: left;
+  margin: 5px;
+  width: 435px;
+  // height: 245px;
+  background-color: #34495E;
+  border-radius: 3px;
+  color: #BDC3C7;
+  &.me {
+    background-color: #F39C12;
+  }
+}
+
+.tt-user-slogan {
+  margin-right: 5px;
+  padding: 10px;
+  h1 {
+    margin-top: 10px;
+  }
+  img {
+    border-radius: 3px;
+  }
+}

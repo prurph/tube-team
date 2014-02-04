@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :user_id, presence: true, uniqueness: true
-  scope :all_sorted_by_point_total, order('points  + past_points DESC')
+  scope :all_sorted_by_point_total, order('points + past_points DESC')
 
   def points_total
     self.points + self.past_points
