@@ -1,0 +1,9 @@
+<div class="form-container">
+  <%= form_for @team, html: { class: 'form' } do |form| %>
+    <div class="form-group">
+      <%= form.label :name, "Team Name", class: 'label-width' %>
+      <%= form.text_field :name, placeholder: 'Team Name', class: 'outline-fix' %>
+      <%= form.submit 'Name It!', class: 'btn btn-blue' %>
+    </div>
+  <% end %>
+</div>

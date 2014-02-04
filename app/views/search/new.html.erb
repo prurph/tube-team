@@ -1,13 +1,18 @@
-<h1>Paste a youtube id in here!</h1>
-<%= form_for @video do |form| %>
-  <%= form.label :yt_id, "Youtube ID" %>
-  <%= form.text_field :yt_id %>
-  <%= form.submit('Find by ID') %>
-<% end %>
+<div class="form-container">
+  <%= form_for @video, html: { class: 'form' } do |form| %>
+    <div class="form-group">
+      <%= form.label :yt_id, "Paste a YouTube URL!", class: 'label-width' %>
+      <%= form.text_field :yt_id, placeholder: 'YT URL', class: 'outline-fix' %>
+      <%= form.submit 'Find by ID', class: 'btn btn-blue' %>
+    </div>
+  <% end %>
 
-<h1>Or Search!</h1>
-<%= form_tag({ action: 'create_many', controller: 'videos'}) do %>
-  <%= label_tag(:search_term, "Search for: ") %>
-  <%= text_field_tag(:search_term) %>
-  <%= submit_tag('Search') %>
-<% end %>
+  <%= form_tag({ action: 'create_many', controller: 'videos'}) do %>
+    <div class="form-group">
+      <%= label_tag :search_term, "Or search!", class: 'label-width' %>
+      <%= text_field_tag :search_term, nil, placeholder: 'Your query, sir/madam.',
+        class: 'outline-fix' %>
+      <%= submit_tag 'Search', class: 'btn btn-blue' %>
+    </div>
+  <% end %>
+</div>

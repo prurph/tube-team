@@ -22,6 +22,8 @@ class VideosController < ApplicationController
   end
 
   def create
+    yt_id_parsed = (video_params[:yt_id] =~
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/)[2]
     exists = Video.find_by_yt_id(video_params[:yt_id])
     if exists
       return redirect_to exists

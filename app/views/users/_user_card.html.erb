@@ -1,0 +1,33 @@
+<div class="tt-user-outer" id="<%= user.username %>">
+  <div class="tt-user-inner">
+    <div class="tt-user-slogan">
+      <%= link_to gravatar_for(user), 'http://www.gravatar.com', target: '_blank' %>
+      <h1><%= user.username %></h1>
+    </div>
+    <div class="tt-user-stats">
+      <table class="table table-hover table-condensed user-table">
+        <tbody>
+          <tr>
+            <td>Playing Since</td>
+            <td><%= user.created_at.strftime("%b %e / %Y") %></td>
+          </tr>
+          <tr>
+            <td>Manager of</td>
+
+          <% if user.team.present? %>
+            <td><%= link_to user.team.name.truncate(19), user.team %></td>
+          </tr>
+          <tr>
+            <td>Total Points</td>
+            <td><%= user.team.points %></td>
+          </tr>
+          <% else %>
+            <td>(No Team)</td>
+          </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

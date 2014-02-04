@@ -5,7 +5,7 @@
 /* Basic Overrides */
 a {
   text-decoration: none;
-  color: #C0392B;
+  color: #E67E22;
 }
 
 a:hover {
@@ -209,7 +209,12 @@ a:hover {
   padding-top: 4px;
   border-radius: 3px;
   text-align: center;
-  background-color: #F39C12;
+  background-color: #34495E;
+  color: #BDC3C7;
+  &.me {
+    background-color: #F39C12;
+    color: #34495E;
+  }
   font-size: 20px;
   z-index: 10;
   h1 {
@@ -332,14 +337,13 @@ a:hover {
 .tt-user-outer {
   display: inline-block;
   width: 445px;
-  height: 255px;
+  height: 155px;
   margin: 4px auto;
   border-radius: 3px;
   background-color: #BDC3C7;
-  z-axis: 5;
-  margin: 3px;
+  margin: 1px;
   &.me {
-    background-color: #F1C40F;
+    background-color: #F39C12;
   }
 }
 
@@ -347,23 +351,67 @@ a:hover {
   position: relative;
   float: left;
   margin: 5px;
+  height: 145px;
   width: 435px;
   // height: 245px;
   background-color: #34495E;
   border-radius: 3px;
   color: #BDC3C7;
   &.me {
-    background-color: #F39C12;
+    background-color: #F1C40F;
+    color: #34495E;
   }
 }
 
 .tt-user-slogan {
-  margin-right: 5px;
-  padding: 10px;
+  padding: 5px;
+  margin-right: 10px;
+  width: 140px;
+  display: inline-block;
   h1 {
+    width: 100px;
     margin-top: 10px;
+    display: inline-block;
   }
   img {
     border-radius: 3px;
+    height: 80px;
+    width: 80px;
   }
+}
+
+.tt-user-stats {
+  position: relative;
+  top: -5px;
+  display: inline-block;
+  width: 260px;
+  margin: 5px 0;
+  tr:first-child td {
+    border-top: none;
+  }
+}
+
+/* forms */
+.outline-fix {
+  outline-width: 0;
+  &:focus{
+    // need important to override attribute set
+    border-color: #F39C12 !important;
+  }
+}
+
+.btn-blue {
+  color: #BDC3C7;
+}
+
+.label-width {
+  width: 170px;
+  padding-right: 5px;
+  font-size: 16px;
+  text-align: right;
+}
+
+.form-container {
+  width: 90%;
+  margin: 0 auto;
 }

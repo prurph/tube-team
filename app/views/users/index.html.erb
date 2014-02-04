@@ -1,34 +1,9 @@
-<% @users.each do |user| %>
-  <div class="tt-user-outer">
-    <div class="tt-user-inner">
-      <div class="tt-user-slogan">
-        <h1><%= user.username %></h1>
-        <%= link_to gravatar_for(user), 'http://www.gravatar.com', target: '_blank' %>
-      </div>
-      <div class="tt-user-stats">
-        <table class="table table-hover table-condensed user-table">
-          <tbody>
-            <tr>
-              <td>Playing Since</td>
-              <td><%= user.created_at.strftime("%b %e / %Y") %></td>
-            </tr>
-            <tr>
-              <td>Manager of</td>
-              <% if user.team.present? %>
-                <td><%= link_to user.team.name.truncate(35), user.team %></td>
-              <% elsif current_user == user %>
-                <td><%= link_to "Create new team!", new_team_path %></td>
-              <% else %>
-                <td>None</td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>Total Points</td>
-              <td><%= user.team.points_total %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-<% end %>
+<div class="video-card-list">
+  <% @users.each do |user| %>
+    <% if current_user == user %>
+      <%= render partial: 'users/my_user_card.html.erb', locals: { user: user } %>
+    <% else %>
+      <%= render partial: 'users/user_card.html.erb', locals: { user: user } %>
+    <% end %>
+  <% end %>
+</div>
