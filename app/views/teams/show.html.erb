@@ -1,54 +1,7 @@
-<div class="container">
-  <div class="row team-header">
-    <div class="col-xs-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-ribbon"><%= @team.user.username %></h3>
-        </div>
-        <div class="bg-primary panel-body">
-          <h2 class="big-text">HI</h2>
-        </div>
-        <div class="panel-footer">
-          <h3 class="panel-ribbon">MANAGER</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 middle-part">
-      <div class="team-stats">
-        <h1 class="bg-primary name-banner"><%= @team.name %></h1>
-          <div class="team-stats">
-            <h4>Playing Since: <%= @team.created_at.strftime("%b %e '%y") %></h4>
-            <h4>Total Views: <%= @team.watches %></h4>
-          </div>
-      </div>
-      <div class="admin-panel">
-        <% if @is_me %>
-          <ul class="nav nav-pills nav-justified">
-            <li>
-              <%= link_to "Rename Team", edit_team_path %>
-            </li>
-            <li>
-              <%= link_to "Release Team", @team, method: :delete, data: { confirm:
-                'This will delete your team and release all your videos. Confirm?' } %>
-            </li>
-            <li>
-              <%= link_to "Scout for players", search_new_path %>
-            </li>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-ribbon">Points: <%= @team.points %></h3>
-        </div>
-        <div class="panel-body bg-primary">
-          <h2 class="big-text"><%= @rank %></h2>
-        </div>
-        <div class="panel-footer">
-          <h3 class="panel-ribbon">RANK</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Clever(?) use of similar parials to differentiate user_team without JS or
+tons of logic in a single partial -->
+<% if current_user.team == @team %>
+  <%= render partial: 'teams/my_team_bar_show', locals: { team: @team, rank: @rank } %>
+<% else %>
+  <%= render partial: 'teams/team_bar_show', locals: { team: @team, rank: @rank } %>
+<% end %>

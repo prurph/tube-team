@@ -8,11 +8,9 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
-    @is_me = (@team.user == current_user)
-    if @team.videos.present?
-      @videos = @team.videos.order(created_at: :desc)
-      @videos.each do |video|
+    @team = Team.find_by_id(params[:id])
+    if @team.videos.empty?
+      @team.videos.each do |video|
         video.refresh_watches
         video.update_points
       end

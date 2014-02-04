@@ -1,3 +1,9 @@
-<%= render partial: 'teams/team_bar', locals: { teams: @teams } %>
-
-<!-- use each_with_index and ordinalize to get rank -->
+<% @teams.each_with_index do |team, rank| %>
+  <!-- Clever(?) use of similar parials to differentiate user_team without JS or
+  tons of logic in a single partial -->
+  <% if current_user.team == team %>
+    <%= render partial: 'teams/my_team_bar', locals: { team: team, rank: rank } %>
+  <% else %>
+    <%= render partial: 'teams/team_bar', locals: { team: team, rank: rank} %>
+  <% end %>
+<% end %>

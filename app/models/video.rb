@@ -36,7 +36,7 @@ class Video < ActiveRecord::Base
   def self.make_search_vids(search_term)
     client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
     # Run the search and return top 5 results
-    videos = client.videos_by(query: search_term).videos.slice!(0,5)
+    videos = client.videos_by(query: search_term).videos.slice!(0,6)
     # Make an array of video objects from the API results
     videos.map! do |video|
       vid_in_db = Video.find_by_yt_id(video.unique_id)

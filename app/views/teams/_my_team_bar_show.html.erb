@@ -1,0 +1,46 @@
+<div class="tt-team-outer-show">
+  <div class="tt-admin-panel">
+    <%= link_to image_tag("Pensils@2x.png", size: "60x60", alt: "Rename Team",
+        class: 'tt-admin-img', title: "Rename Team"),
+        team_path(id: team.id), method: :update %>
+    <%= link_to image_tag("trash@2x.png", size: "60x60", alt: "Release Team",
+        class: 'tt-admin-img', title: "Release Team"),
+        team_path(id: team.id), method: :delete, data: { confirm: "This will drop #{team.name.truncate(30)} and all its videos immediately. Confirm?" } %>
+    <%= link_to image_tag("Search@2x.png", size: "60x60", alt: "Scout for Players",
+        class: 'tt-admin-img', title: "Find Players"),
+        search_new_path %>
+  </div>
+  <div class="tt-rank-panel">
+    <div class="big center"><%= ( rank + 1).ordinalize %></div>
+  </div>
+  <div class="tt-myteam-inner-show">
+    <div class="tt-main-team-show">
+      <div class="tt-team-splash-show">
+        <h1><%= link_to team.name.truncate(30), team %></h1>
+      </div>
+      <div class="tt-team-stats-show">
+        <table class="table table-hover table-condensed tt-team-table">
+          <tbody>
+            <tr>
+              <td>Playing Since</td>
+              <td><%= team.created_at.strftime("%b %e / %Y") %></td>
+            </tr>
+            <tr>
+              <td>Total Views</td>
+              <td><%= team.watches %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="tt-manager-panel">
+      <h1><%= team.user.username %></h1>
+      <p>Manager<p>
+  </div>
+</div>
+
+ <tr>
+              <td>Manager</td>
+              <td><%= link_to team.user.username, team.user %></td>
+            </tr>
