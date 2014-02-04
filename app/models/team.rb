@@ -6,19 +6,19 @@ class Team < ActiveRecord::Base
   validates :user_id, presence: true, uniqueness: true
 
   def update_points(start_time=Time.new(1982), end_time=Time.now)
-    to_add = 0
+    tot_points = 0
 
     self.videos.each do |video|
-      video.update_points(start_time, end_time)
-      to_add += video.points
+      if (Time.now - video.updated_at > 600) # Don't update if last done <10 min
+        video.refresh_watches
+        video.update_points(start_time, end_time)
+      end
+      tot_points += video.points
     end
-    self.update_attributes(points: to_add)
+    self.update_attributes(points: tot_points)
   end
 
   def get_rank
-    # This is probably not a good idea to do every time someone loads a team
-    # later create a ranking field for users and run a rake task to update it
-    # periodically
     Team.all.order(points: :desc).index(self) + 1
   end
 

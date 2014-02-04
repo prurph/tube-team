@@ -5,18 +5,18 @@ class TeamsController < ApplicationController
   def index
     # Return these in ranked order so we can display rankings
     @teams = Team.all.order(points: :desc)
+    @teams.each do |team|
+      team.update_points
+      team.update_watches
+    end
   end
 
   def show
     @team = Team.find_by_id(params[:id])
-    if @team.videos.empty?
-      @team.videos.each do |video|
-        video.refresh_watches
-        video.update_points
-      end
-      @team.update_points
-      @team.update_watches
-    end
+    # These refresh video information as well
+    # Always do points first (it calls video update watches)
+    @team.update_points
+    @team.update_watches
     @rank = @team.get_rank
   end
 

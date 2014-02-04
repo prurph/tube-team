@@ -5,3 +5,46 @@
     <%= user.team.points %> Points
   <% end %>
 <% end %>
+
+<div class="tt-user-outer">
+  <div class="tt-user-left">
+    <h1><%= user.username %></h1>
+    <%= link_to gravatar_for(team.user), 'http://www.gravatar.com', target: '_blank' %>
+    </div>
+  </div>
+  <div class="tt-user-stats">
+    <table class="table table-hover table-condensed user-table">
+      <tbody>
+        <tr>
+          <td>Playing Since</td>
+          <td><%= user.created_at.strftime("%b %e / %Y") %></td>
+        </tr>
+        <tr>
+          <td>Manager of</td>
+          <% unless user.team.empty? %>
+            <td><%= link_to user.team.name, user.team %></td>
+          <% elsif current_user == user %>
+            <td><%= link_to "Create new team!" new_team_path %></td>
+          <% else %>
+            <td>None</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Total Points</td>
+        </tr>
+
+
+          <tr>
+            <td>Joined</td>
+            <td><%= video.team.created_at.strftime("%b %e / %Y") %></td>
+          </tr>
+          <tr>
+            <td>Points</td>
+            <td><%= video.points %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

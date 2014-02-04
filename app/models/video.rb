@@ -56,7 +56,7 @@ class Video < ActiveRecord::Base
 
     # Here's where to add in a weighting algorithm based on total watches
     self.update_attributes(points: add_watches)
-    self.save
+    # self.save
   end
 
   def refresh_watches

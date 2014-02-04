@@ -11,7 +11,7 @@ tons of logic in a single partial -->
   <%= render partial: 'teams/team_bar_show', locals: { team: @team, rank: @rank } %>
   <div class="video-card-list cf">
     <% @team.videos.each do |video| %>
-      <%= render partial: 'videos/my_video_card.html.erb', locals: { video: video } %>
+      <%= render partial: 'videos/video_card.html.erb', locals: { video: video } %>
     <% end %>
   </div>
 <% end %>
