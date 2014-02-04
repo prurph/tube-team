@@ -1,6 +1,6 @@
 @import 'bootstrap';
 @import "flat-ui";
-@import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
+@import url(http://fonts.googleapis.com/css?family=Lemon);
 
 /* Basic Overrides */
 a {
@@ -142,7 +142,7 @@ a:hover {
 
 .tt-team-splash h1 {
   font-size: 30px;
-  font-family: 'Lily Script One', 'Lato', Sans-Serif;
+  font-family: 'Lemon', 'Lato', Sans-Serif;
 }
 
 .find-more {
@@ -181,7 +181,7 @@ a:hover {
 
 .tt-team-splash-show h1 {
   font-size: 50px;
-  font-family: 'Lily Script One', 'Lato', Sans-Serif;
+  font-family: 'Lemon', 'Lato', Sans-Serif;
   text-align: center;
 }
 
@@ -412,6 +412,29 @@ a:hover {
 }
 
 .form-container {
-  width: 90%;
-  margin: 0 auto;
+  width: 75%;
+  margin: 10px auto;
 }
+
+/* nav */
+
+.tt-nav {
+  background-color: #7F8C8D;
+  width: 100%;
+  height: 60px;
+  padding-top: 12px;
+}
+
+.nav-user {
+  position: relative;
+  height: 40px;
+  top: -12px;
+  line-height: 60px;
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+.nav li {
+  font-size: 14px;
+}
+

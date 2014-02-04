@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
   def new
     if current_user.team.present?
       flash[:alert] = "One team per user. Must release current team first."
-      redirect_to action: :show
+      redirect_to current_user.team
     else
       @team = Team.new
     end
@@ -83,7 +83,7 @@ class TeamsController < ApplicationController
       # videos have dependent: :destroy relationship with team
       if team.destroy
         flash[:notice] = "Team deleted"
-        redirect_to action: :index
+        redirect_to action: :new
       else
         flash[:alert] = team.errors.full_messages.join(', ')
         redirect_to :edit

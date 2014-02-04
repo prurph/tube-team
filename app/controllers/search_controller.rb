@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def new
-    if current_user.team.blank?
+    if !user_signed_in? || current_user.team.blank?
       flash[:alert] = "Please create a team before scouting for players."
       return redirect_to new_team_path
     elsif current_user.team.videos.length >= 5
