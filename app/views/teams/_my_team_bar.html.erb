@@ -1,8 +1,8 @@
-<div class="tt-team-outer" id="my-team">
+<div class="tt-team-outer" id="">
   <div class="tt-admin-panel">
     <%= link_to image_tag("Pensils@2x.png", size: "60x60", alt: "Rename Team",
         class: 'tt-admin-img', title: "Rename Team"),
-        team_path(id: team.id), method: :update %>
+        edit_team_path(id: team.id) %>
     <%= link_to image_tag("trash@2x.png", size: "60x60", alt: "Release Team",
         class: 'tt-admin-img', title: "Release Team"),
         team_path(id: team.id), method: :delete, data: { confirm: "This will drop #{team.name.truncate(30)} and all its videos immediately. Confirm?" } %>
@@ -11,7 +11,7 @@
         search_new_path %>
   </div>
   <div class="tt-rank-panel">
-    <div class="big center"><%= (rank + 1).ordinalize %></div>
+    <div class="big center"><%= link_to ( rank + 1).ordinalize, (teams_path + '#' + team.name) %></div>
   </div>
   <div class="tt-myteam-inner">
     <div class="tt-main-team">

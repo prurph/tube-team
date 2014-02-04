@@ -2,11 +2,17 @@
 @import "flat-ui";
 @import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
 
-/* _video_card.html.erb (Videos#Show) */
-
+/* Basic Overrides */
 a {
   text-decoration: none;
+  color: #C0392B;
 }
+
+a:hover {
+  color: #2980B9;
+}
+
+/* _video_card.html.erb (Videos#Show) */
 
 .tt-video {
   height: 245px;
@@ -128,7 +134,7 @@ a {
     -moz-transform: scale(1.1), rotate(-10deg);
     -webkit-transform: scale(1.1) rotate(-10deg);
     transform: scale(1.1) rotate(-10deg);
-    box-shadow: 0 0 1px 2px #7F8C8D;
+    box-shadow: 0 0 1px 2px #2980B9;
     z-index: 10
     }
   }
@@ -158,6 +164,9 @@ a {
   line-height: 150px;
   font-size: 60px;
   text-align: center;
+  h1 {
+    text-shadow: 0 0 1px 1px #ECF0F1;
+  }
 }
 
 .center {
@@ -199,6 +208,7 @@ a {
   height: 100%;
   margin: 0;
   padding: 5px;
+  border-radius: 3px;
 }
 
 .tt-team-inner-show {
@@ -230,19 +240,6 @@ a {
   z-index: 5;
 }
 
-// .tt-manager-panel {
-//   margin-right: 5px;
-//   height: 50px;
-//   line-height: 150px;
-//   font-size: 20px;
-//   text-align: center;
-//   position: absolute;
-//   right: 0;
-//   bottom: 40px;
-//   z-index: 5;
-//   line-height: 5px;
-// }
-
 .tt-manager-panel {
   position: relative;
   display: inline-block;
@@ -260,5 +257,18 @@ a {
     font-size: 28px;
     margin-top: 5px;
     margin-bottom: 3px;
+  }
+  .gravatar {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 3px;
+    &:hover {
+    -moz-transform: scale(1.05), rotate(10deg);
+    -webkit-transform: scale(1.05) rotate(10deg);
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 0 1px 2px #BDC3C7;
+    z-index: 10
+    }
   }
 }

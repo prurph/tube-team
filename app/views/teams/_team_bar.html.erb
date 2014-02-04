@@ -1,8 +1,8 @@
-<div class="tt-team-outer">
+<div class="tt-team-outer" id="<%= team.name %>">
     <div class="tt-nonadmin-panel">
     </div>
   <div class="tt-rank-panel">
-    <div class="big center"><%= (rank + 1).ordinalize %></div>
+    <div class="big center"><%= link_to (rank + 1).ordinalize, teams_path %></div>
   </div>
   <div class="tt-team-inner">
     <div class="tt-main-team">
@@ -27,12 +27,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="tt-video-thumbs">
-      <% unless team.videos.empty? %>
-        <% team.videos.each do |video| %>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>
