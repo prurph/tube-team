@@ -1,4 +1,4 @@
-<div class="container video-card-list">
+<div class="video-card-list">
   <% @videos.each do |video| %>
     <% if @user_team == video.team %>
       <%= render partial: 'videos/my_video_card.html.erb', locals: { video: video } %>

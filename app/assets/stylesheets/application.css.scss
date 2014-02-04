@@ -12,6 +12,18 @@ a:hover {
   color: #8E44AD;
 }
 
+/* Micro Clearfix */
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
 /* _team_bar.html.erb (Teams#Index) */
 
 .tt-team-outer {
@@ -134,6 +146,12 @@ a:hover {
   font-family: 'Lily Script One', 'Lato', Sans-Serif;
 }
 
+.find-more {
+  position: relative;
+  bottom: 5px;
+  text-align: center;
+}
+
 .tt-team-stats {
   margin-top: 25px;
 }
@@ -151,7 +169,6 @@ a:hover {
 .tt-team-inner-show, .tt-myteam-inner-show {
   height: 100%;
   margin: 0;
-  padding: 5px;
   border-radius: 3px;
 }
 
@@ -185,18 +202,17 @@ a:hover {
 }
 
 .tt-manager-panel {
-  position: relative;
   display: inline-block;
   float: right;
   height: 100%;
   width: 130px;
-  z-index: 5;
   bottom: 200px;
   padding-top: 4px;
   border-radius: 3px;
   text-align: center;
   background-color: #F39C12;
   font-size: 20px;
+  z-index: 10;
   h1 {
     font-size: 28px;
     margin-top: 5px;
@@ -221,7 +237,10 @@ a:hover {
 
 .video-card-list {
   position: relative;
+  max-width: 950px;
+  padding: 0;
   margin: 0 auto;
+  // margin-top: 5px;
 }
 
 .tt-card-inner {
@@ -238,7 +257,6 @@ a:hover {
 
 .tt-card-outer {
   position: relative;
-  display: inline-block;
   float: left;
   margin: 5px;
   width: 295px;
@@ -260,6 +278,11 @@ a:hover {
   position: relative;
 }
 
+// .tt-vid-stats {
+//   overflow-y: auto;
+//   overflow-x: hidden;
+// }
+
 .tt-signrel-btn {
   position: absolute;
   right: 0;
@@ -280,6 +303,6 @@ a:hover {
   }
 }
 
-.tt-card-table {
-  margin-top: 5px;
-}
+// .tt-card-table {
+//   margin-top: 5px;
+// }

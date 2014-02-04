@@ -32,11 +32,16 @@
           </tbody>
         </table>
       </div>
+      <% if team.videos.empty? %>
+        <div class="tt-team-splash find-more">
+          <h1>No videos! Why not <%= link_to "find some?", search_new_path %></h1>
+        </div>
+      <% end %>
     </div>
-  </div>
-  <div class="tt-manager-panel">
+    <div class="tt-manager-panel">
       <h1><%= link_to team.user.username, team.user %></h1>
       <p>Manager<p>
       <%= link_to gravatar_for(team.user), 'http://www.gravatar.com', target: '_blank' %>
+    </div>
   </div>
 </div>

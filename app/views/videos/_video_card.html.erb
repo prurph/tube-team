@@ -16,7 +16,7 @@
         <thead class="tt-stats-table">
           <tr>
             <th colspan="2"><div class="glyphicon glyphicon-star"></div>
-            <%= video.title.truncate(75) %></th>
+            <%= video.title.truncate(50) %></th>
           </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td>Team</td>
-            <td><%= video.team ? (link_to video.team.name, video.team)
+            <td><%= video.team ? (link_to video.team.name.truncate(25), video.team)
                                  : "Free Agent" %></td>
           </tr>
           <% if video.team %>

@@ -10,9 +10,10 @@
 
   <%= yield %>
 
-    <br><br><br><br><br><br><br><br><br>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= render 'layouts/user_widget' %>
+    <div style="clear: both">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= render 'layouts/user_widget' %>
+    </div>
   </body>
 </html>
