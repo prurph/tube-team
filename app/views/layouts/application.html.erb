@@ -8,15 +8,11 @@
   </head>
   <body>
     <header>
+      <%= render 'layouts/flash_messages' %>
       <%= render 'layouts/global_header' %>
     </header>
 
   <%= yield %>
 
-    <div style="clear: both">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= render 'layouts/user_widget' %>
-    </div>
   </body>
 </html>

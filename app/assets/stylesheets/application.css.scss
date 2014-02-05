@@ -1,6 +1,6 @@
 @import 'bootstrap';
 @import "flat-ui";
-@import url(http://fonts.googleapis.com/css?family=Lemon);
+@import url(http://fonts.googleapis.com/css?family=Lemon|Carrois+Gothic);
 
 /* Basic Overrides */
 a {
@@ -23,6 +23,19 @@ a:hover {
 .cf:after {
     clear: both;
 }
+
+/* Flash alert and notice */
+
+.flash {
+  position: absolute;
+  margin-left: 40%;
+  height: 60px;
+  width: 20%;
+  font-size: 16px;
+  text-align: center;
+}
+
+
 
 /* _team_bar.html.erb (Teams#Index) */
 
@@ -72,7 +85,7 @@ a:hover {
   display: inline-block;
   float: left;
   height: 100%;
-  width: 90px;
+  width: 75px;
   z-index: 5;
   padding-top: 4px;
   border-radius: 3px;
@@ -106,7 +119,7 @@ a:hover {
 
 .tt-rank-panel {
   margin-right: 20px;
-  width: 125px;
+  width: 115px;
   float: left;
   display: inline-block;
   position: relative;
@@ -142,7 +155,6 @@ a:hover {
 
 .tt-team-splash h1 {
   font-size: 30px;
-  font-family: 'Lemon', 'Lato', Sans-Serif;
 }
 
 .find-more {
@@ -204,7 +216,7 @@ a:hover {
   display: inline-block;
   float: right;
   height: 100%;
-  width: 130px;
+  width: 118px;
   bottom: 200px;
   padding-top: 4px;
   border-radius: 3px;
@@ -227,13 +239,6 @@ a:hover {
     height: 100px;
     margin-top: 10px;
     border-radius: 3px;
-    &:hover {
-    -moz-transform: scale(1.05), rotate(10deg);
-    -webkit-transform: scale(1.05) rotate(10deg);
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 0 1px 2px #BDC3C7;
-    z-index: 10
-    }
   }
 }
 
@@ -319,7 +324,6 @@ a:hover {
   z-index: 15;
   background-color: #ECF0F1;
   border-radius: 2px 0 2px 2px;
-  // transition: all 0.2s ease;
   &:hover {
     -moz-transform: scale(1.1), rotate(10deg);
     -webkit-transform: scale(1.1) rotate(10deg);
@@ -414,27 +418,104 @@ a:hover {
 .form-container {
   width: 75%;
   margin: 10px auto;
+  min-width: 600px;
 }
 
 /* nav */
 
 .tt-nav {
-  background-color: #7F8C8D;
+  background-color: #34495E;
   width: 100%;
   height: 60px;
-  padding-top: 12px;
+  padding-top: 8px;
+  display: inline-block;
+  min-width: 800px;
+  ul {
+    height: 60px;
+  }
 }
 
-.nav-user {
+.nav-user, .tt-logo {
   position: relative;
+  display: inline-block;
+  z-index: 5;
   height: 40px;
-  top: -12px;
+  top: -10px;
   line-height: 60px;
   padding: 0 10px;
-  font-size: 20px;
+  font-size: 24px;
+  color: #E74C3C;
+}
+
+.tt-logo {
+  font-family: 'Carrois Gothic', 'Helvetica Neue', Helvetica, Arial, sans;
+  font-size: 32px;
+  float: right;
+  right: 0px;
+  margin-top: 8px;
+  position: absolute;
+  color: #BDC3C7;
+}
+
+.logo-tube {
+  border-top-left-radius: 10% 35%;
+  border-top-right-radius: 10% 35%;
+  border-bottom-left-radius: 10% 35%;
+  border-bottom-right-radius: 10% 35%;
+  color: #ECF0F1;
+  padding-left: 6px;
+  padding-right: 6px;
+  background: -moz-linear-gradient(0deg, #C0392B, #E74C3C);
+  background: -webkit-linear-gradient(0deg, #C0392B, #E74C3C);
+  background: linear-gradient(0deg, #C0392B, #E74C3C);
+  text-shadow: 0px 0px 1px #2C3E50;
 }
 
 .nav li {
-  font-size: 14px;
+  font-size: 18px;
 }
 
+.tt-logo {
+}
+
+/* Videos#Edit */
+
+.signing-container {
+  margin: 20px auto;
+  height: 300px;
+  width: 400px;
+}
+
+.contract-table {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.vid-thumb {
+  height: 250px;
+  border-radius: 3px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.signing {
+  font-size: 20px;
+}
+
+.amt-left td {
+  font-size: 105%;
+  color: #E74C3C;
+}
+
+.sign-btns {
+  position: relative;
+  margin: 0 auto;
+  top: -15px;
+}
+
+.choices {
+  width: 175px;
+  margin: 10px;
+  padding: 0;
+  display: inline-block;
+}

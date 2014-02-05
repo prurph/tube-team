@@ -1,6 +1,39 @@
-<h1> videos#edit has team_id too (assign videos here)</h1>
-<%= @video.title %> has <%= @video.initial_watches %><br>
-Signing it will cost: <%= @video.salary %>. Your bankroll is: <%= @team.bankroll %>.
-<%= form_for [@team, @video] do |form| %>
-  <%= form.submit "Sign video" %> to <%= @team.name %>
+<div class="signing-container">
+  <div class="vid-thumb" style="background-image: url('<%= url_for(@video.thumbnail) %>')">
+  </div>
+  <div class="contract-table">
+    <table class="table contact-table">
+      <thead>
+        <tr>
+          <th colspan="2"><span class="signing">Contract For:</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Video:</td>
+          <td><%= @video.title.truncate(50) %></td>
+        </tr>
+        <tr>
+          <td>Available Funds:</td>
+          <td><%= @team.bankroll %>
+        </tr>
+        <tr>
+          <td>Salary:</td>
+          <td><%= @video.salary %></td>
+        </tr>
+        <tr class="amt-left">
+          <td>Left after signing:</td>
+          <td><%= @team.bankroll - @video.salary %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class='sign-btns'>
+    <%= form_for [@team, @video], html: { class: 'choices' } do |form| %>
+      <%= form.submit "Sign Player", class: 'btn btn-blue' %>
+    <% end %>
+    <%= form_tag({action: 'new', controller: 'search'}, method: :get, class: 'choices') do %>
+      <%= submit_tag "Return to Search", class: 'btn btn-danger' %>
 <% end %>
+  </div>
+</div>

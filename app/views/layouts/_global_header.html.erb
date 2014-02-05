@@ -14,6 +14,10 @@
         <li>
           <%= link_to "Scout Players", search_new_path %>
         </li>
+      <% else %>
+        <li>
+          <%= link_to "Create Team", new_team_path %>
+        </li>
       <% end %>
     <% else %>
       <li>
@@ -21,4 +25,7 @@
       </li>
     <% end %>
   </ul>
+  <div class="tt-logo">
+    <span class="logo-tube">Tube</span>Team
+  </div>
 </div>
