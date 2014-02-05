@@ -1,31 +1,33 @@
 <div class='tt-nav'>
-  <ul class="nav nav-pills">
-    <% if user_signed_in? %>
-      <li>
-        <div class="nav-user"><%= current_user.username %></div>
-      </li>
-      <li>
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      </li>
-      <% if current_user.team %>
+  <div class="container">
+    <ul class="nav nav-pills">
+      <% if user_signed_in? %>
         <li>
-          <%= link_to current_user.team.name, current_user.team %>
+          <div class="nav-user"><%= current_user.username %></div>
         </li>
         <li>
-          <%= link_to "Scout Players", search_new_path %>
+          <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
         </li>
+        <% if current_user.team %>
+          <li>
+            <%= link_to current_user.team.name, current_user.team %>
+          </li>
+          <li>
+            <%= link_to "Scout Players", search_new_path %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Create Team", new_team_path %>
+          </li>
+        <% end %>
       <% else %>
         <li>
-          <%= link_to "Create Team", new_team_path %>
+          <div class="nav-user"><%= link_to "Login/Signup", new_user_session_path %></div>
         </li>
       <% end %>
-    <% else %>
-      <li>
-        <div class="nav-user"><%= link_to "Login/Signup", new_user_session_path %></div>
-      </li>
-    <% end %>
-  </ul>
-  <div class="tt-logo">
-    <span class="logo-tube">Tube</span>Team
+      <div class="tt-logo">
+        <span class="logo-tube">Tube</span>Team
+      </div>
+    </ul>
   </div>
 </div>

@@ -18,6 +18,7 @@ class TeamsController < ApplicationController
     @team.update_points
     @team.update_watches
     @rank = @team.get_rank
+    @is_me = current_user.team == @team ? 'me' : nil # Used for styling
   end
 
   def new

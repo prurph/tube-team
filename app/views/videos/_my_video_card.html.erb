@@ -1,16 +1,23 @@
-<div class="tt-card-outer me">
-  <div class="tt-card-inner me center">
+<!-- This SHOULD be obsolete now
+<div class="tt-card-outer <%= is_me %>">
+  <div class="tt-card-inner <%= is_me %> center">
     <div class="tt-video">
       <%= video.embed_html5.html_safe %>
       <div class="tt-signrel-btn">
-        <%= link_to image_tag("trash@2x.png", size: "40x40", alt: "Release Player",
-            title: "Release player from your team" ),
-            team_video_path(team_id: current_user.team.id, id: video.id),
-            method: :delete, data: {
-            confirm: "This will drop #{video.title.truncate(30)}
-            from your team immediately. Confirm?",
-            }
-        %>
+        <% if is_me %>
+          <%= link_to image_tag("trash@2x.png", size: "40x40", alt: "Release Player",
+              title: "Release player from your team" ),
+              team_video_path(team_id: current_user.team.id, id: video.id),
+              method: :delete, data: {
+              confirm: "This will drop #{video.title.truncate(30)}
+              from your team immediately. Confirm?",
+              }
+          %>
+        <% else %>
+          <%= link_to image_tag("check@2x.png", size: "40x40", alt: "Sign Player",
+              title: "Sign player to your team"),
+              edit_team_video_path(team_id: current_user.team, id: video) %>
+        <% end %>
       </div>
     </div>
 
@@ -25,8 +32,7 @@
         <tbody>
           <tr>
             <td>Views</td>
-            <td><%= number_to_human(video.initial_watches + video.watches) %> (All-time) /
-             <%= video.watches %> (On Team)</td>
+            <td><%= number_to_human(video.initial_watches + video.watches) %> (All-time)</td>
           </tr>
           <tr>
             <td>Team</td>
@@ -48,3 +54,4 @@
     </div>
   </div>
 </div>
+ -->

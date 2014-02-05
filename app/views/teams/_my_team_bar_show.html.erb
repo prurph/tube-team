@@ -1,19 +1,27 @@
+<!-- This SHOULD be obsolete now -->
+
+<!--
 <div class="tt-team-outer-show" id="<%= team.name %>">
-  <div class="tt-admin-panel">
-    <%= link_to image_tag("Pensils@2x.png", size: "60x60", alt: "Rename Team",
-        class: 'tt-admin-img', title: "Rename Team"),
-        edit_team_path(id: team.id) %>
-    <%= link_to image_tag("trash@2x.png", size: "60x60", alt: "Release Team",
-        class: 'tt-admin-img', title: "Release Team"),
-        team_path(id: team.id), method: :delete, data: { confirm: "This will drop #{team.name.truncate(30)} and all its videos immediately. Confirm?" } %>
-    <%= link_to image_tag("Search@2x.png", size: "60x60", alt: "Scout for Players",
-        class: 'tt-admin-img', title: "Find Players"),
-        search_new_path %>
-  </div>
+  <% if is_me %>
+    <div class="tt-admin-panel">
+      <%= link_to image_tag("Pensils@2x.png", size: "60x60", alt: "Rename Team",
+          class: 'tt-admin-img', title: "Rename Team"),
+          edit_team_path(id: team.id) %>
+      <%= link_to image_tag("trash@2x.png", size: "60x60", alt: "Release Team",
+          class: 'tt-admin-img', title: "Release Team"),
+          team_path(id: team.id), method: :delete, data: { confirm: "This will drop #{team.name.truncate(30)} and all its videos immediately. Confirm?" } %>
+      <%= link_to image_tag("Search@2x.png", size: "60x60", alt: "Scout for Players",
+          class: 'tt-admin-img', title: "Find Players"),
+          search_new_path %>
+    </div>
+  <% else %>
+    <div class="tt-nonadmin-panel">
+    </div>
+  <% end %>
   <div class="tt-rank-panel">
     <div class="big center"><%= link_to (rank).ordinalize, (teams_path + '#' + team.name) %></div>
   </div>
-  <div class="tt-myteam-inner-show">
+  <div class="tt-team-inner-show <%= is_me %>">
     <div class="tt-main-team-show">
       <div class="tt-team-splash-show">
         <h1><%= team.name.truncate(18) %></h1>
@@ -42,10 +50,11 @@
         </div>
       <% end %>
     </div>
-     <div class="tt-manager-panel me">
+     <div class="tt-manager-panel <%= is_me %>">
         <h1><%= link_to team.user.username, team.user %></h1>
         <p>Manager<p>
         <%= link_to gravatar_for(team.user), 'http://www.gravatar.com', target: '_blank' %>
       </div>
   </div>
 </div>
+ -->

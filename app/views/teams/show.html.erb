@@ -1,17 +1,4 @@
-<!-- Clever(?) use of similar parials to differentiate user_team without JS or
-tons of logic in a single partial -->
-<% if current_user.team == @team %>
-  <%= render partial: 'teams/my_team_bar_show', locals: { team: @team, rank: @rank } %>
-    <div class="video-card-list cf">
-      <% @team.videos.each do |video| %>
-        <%= render partial: 'videos/my_video_card.html.erb', locals: { video: video } %>
-      <% end %>
-    </div>
-<% else %>
-  <%= render partial: 'teams/team_bar_show', locals: { team: @team, rank: @rank } %>
-  <div class="video-card-list cf">
-    <% @team.videos.each do |video| %>
-      <%= render partial: 'videos/video_card.html.erb', locals: { video: video } %>
-    <% end %>
-  </div>
-<% end %>
+<div class="container">
+  <%= render partial: 'teams/team_bar_show', locals: { team: @team, rank:
+    @rank, is_me: @is_me } %>
+</div>

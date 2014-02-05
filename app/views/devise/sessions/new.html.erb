@@ -1,21 +1,22 @@
-<h2>Sign in</h2>
+<div class="container">
+  <div class="form-container">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: 'form-inline' }) do |f| %>
+      <div class="form-group">
+        <div><%= f.label :email, class: 'label-width' %><br />
+        <%= f.email_field :email, :autofocus => true, class: 'outline-fix' %></div>
 
-<div class="form-container">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div class="form-group">
-      <div><%= f.label :email, class: 'label-width' %><br />
-      <%= f.email_field :email, :autofocus => true, class: 'outline-fix' %></div>
+        <div><%= f.label :password, class: 'label-width' %><br />
+        <%= f.password_field :password, class: 'outline-fix' %></div>
 
-      <div><%= f.label :password, class: 'label-width' %><br />
-      <%= f.password_field :password, class: 'outline-fix' %></div>
+        <% if devise_mapping.rememberable? -%>
+          <div><%= f.label :remember_me %><%= f.check_box :remember_me %> </div>
+        <% end -%>
 
-      <% if devise_mapping.rememberable? -%>
-        <div><%= f.label :remember_me %><%= f.check_box :remember_me %> </div>
-      <% end -%>
-
-      <div><%= f.submit "Sign in" %></div>
-    </div>
-  <% end %>
+        <div><%= f.submit "Sign in", class: 'btn btn-blue' %></div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

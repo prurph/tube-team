@@ -11,7 +11,22 @@
       <tbody>
         <tr>
           <td>Video:</td>
-          <td><%= @video.title.truncate(50) %></td>
+          <td><%= link_to @video.title.truncate(80), '#', 'data-toggle' => 'modal',
+            'data-target' => "\##{@video.id}modal" %>
+            <div class="modal fade" id="<%= "#{@video.id}modal" %>">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><%= @video.title %></h4>
+                  </div>
+                  <div class="modal-body vid-modal">
+                    <%= @video.embed_html5.html_safe %>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+          </td>
         </tr>
         <tr>
           <td>Team Funds:</td>

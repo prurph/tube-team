@@ -12,6 +12,12 @@ a:hover {
   color: #8E44AD;
 }
 
+.container {
+  width: 970px;
+}
+
+
+
 /* Micro Clearfix */
 
 .cf:before,
@@ -27,25 +33,24 @@ a:hover {
 /* Flash alert and notice */
 
 .flash {
-  position: absolute;
-  margin-left: 50%;
+  position: relative;
+  top: -4px;
+  margin: 0;
   height: 60px;
-  width: 30%;
+  width: 100%;
   font-size: 16px;
   text-align: center;
   color: #ECF0F1;
 }
 
 .flash-alert {
-  padding-top: 2px;
-  height: 60px;
   background-color: #E74C3C;
+  line-height: 60px;
 }
 
 .flash-notice {
-  padding-top: 2px;
-  height: 60px;
   background-color: #2ECC71;
+  line-height: 60px;
 }
 
 /* _team_bar.html.erb (Teams#Index) */
@@ -188,23 +193,27 @@ a:hover {
   position: relative;
 }
 
-.tt-team-inner-show, .tt-myteam-inner-show {
+.tt-team-inner-show, {
   height: 100%;
   margin: 0;
   border-radius: 3px;
-}
-
-.tt-team-inner-show {
   background-color: #BDC3C7;
+  &.me {
+    background-color: #F1C40F;
+  }
 }
 
-.tt-myteam-inner-show {
-  background-color: #F1C40F;
-}
+// .tt-team-inner-show {
+//   background-color: #BDC3C7;
+// }
+
+// .tt-myteam-inner-show {
+//   background-color: #F1C40F;
+// }
 
 .tt-team-splash-show h1 {
   font-size: 50px;
-  font-family: 'Lemon', 'Lato', Sans-Serif;
+  font-family: Lemon, Lato, Sans-Serif;
   text-align: center;
 }
 
@@ -261,10 +270,12 @@ a:hover {
 .video-card-list {
   position: relative;
   width: 100%;
-  max-width: 915px;
   padding: 0;
   margin: 0 auto;
-  // margin-top: 5px;
+  text-align: center;
+  h1 {
+    font-family: Lemon, Lato, sans-serif;
+  }
 }
 
 .tt-card-inner {
@@ -281,7 +292,7 @@ a:hover {
 
 .tt-card-outer {
   position: relative;
-  float: left;
+  display: inline-block;
   margin: 5px;
   width: 295px;
   height: 445px;
@@ -292,33 +303,15 @@ a:hover {
   }
 }
 
-/* If time rework these into smaller cards for team page */
-// .tt-card-inner {
-//   width: 290px;
-//   height: 190px;
-//   margin: 4px auto;
-//   border-radius: 3px;
-//   background-color: #BDC3C7;
-//   &.me {
-//     background-color: #F1C40F;
-//   }
-// }
-
-// .tt-card-outer {
-//   position: relative;
-//   float: left;
-//   margin: 5px;
-//   width: 300px;
-//   height: 200px;
-//   background-color: #34495E;
-//   border-radius: 3px;
-//   &.me {
-//     background-color: #F39C12;
-//   }
-// }
-
 .tt-vid-stats {
   position: relative;
+}
+
+.tt-video {
+  .video-player {
+    height: 245px;
+    width: 285px;
+  }
 }
 
 .card-table {
@@ -410,7 +403,7 @@ a:hover {
 }
 
 /* forms */
-.outline-fix {
+.btn, .outline-fix {
   outline-width: 0;
   &:focus{
     // need important to override attribute set
@@ -445,7 +438,7 @@ a:hover {
   display: inline-block;
   min-width: 800px;
   ul {
-    height: 60px;
+    height: 40px;
   }
 }
 
@@ -462,12 +455,11 @@ a:hover {
 }
 
 .tt-logo {
+  display: inline;
+  float: right;
   font-family: 'Carrois Gothic', 'Helvetica Neue', Helvetica, Arial, sans;
   font-size: 32px;
-  float: right;
   right: 0px;
-  margin-top: 8px;
-  position: absolute;
   color: #BDC3C7;
 }
 
@@ -489,15 +481,11 @@ a:hover {
   font-size: 18px;
 }
 
-.tt-logo {
-}
-
 /* Videos#Edit */
 
 .signing-container {
   margin: 20px auto;
-  height: 300px;
-  width: 400px;
+  width: 500px;
 }
 
 .contract-table {
@@ -506,7 +494,7 @@ a:hover {
 }
 
 .vid-thumb {
-  height: 250px;
+  height: 320px;
   border-radius: 3px;
   background-repeat: no-repeat;
   background-position: center center;
@@ -537,8 +525,8 @@ a:hover {
 /* Vid Lists on Team Pages */
 
 .team-roster {
-  max-width: 995px;
-  width: 80%;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -558,6 +546,10 @@ a:hover {
 }
 
 .modal-header {
-  background-color: #BDC3C7;
-  color: #34495E;
+  background-color: #34495E;
+  color: #E67E22;
+}
+
+.baby-delete {
+  float: right;
 }

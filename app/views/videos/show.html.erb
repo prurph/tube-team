@@ -1,9 +1,9 @@
-<div class="video-card-list">
-  <% @videos.each do |video| %>
-    <% if @user_team == video.team %>
-      <%= render partial: 'videos/my_video_card.html.erb', locals: { video: video } %>
-    <% else %>
-      <%= render partial: 'videos/video_card.html.erb', locals: { video: video } %>
+<div class="container">
+  <div class="video-card-list cf">
+    <h1>Search Results</h1>
+    <% @videos.each do |video| %>
+      <%= render partial: 'videos/video_card.html.erb', locals: { video: video,
+        is_me: ( 'me' if video.team == current_user.team ) } %>
     <% end %>
-  <% end %>
+  </div>
 </div>

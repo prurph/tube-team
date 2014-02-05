@@ -17,13 +17,11 @@ class VideosController < ApplicationController
       # Update points (this can later take datetime ranges for season purposes)
       video.update_points
     end
-
-    @user_team = current_user.team
   end
 
   def create
-    yt_id_parsed = (/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)
-      ([^#\&\?]*).*/).match(video_params[:yt_id])
+    yt_id_parsed = (/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/)
+      .match(video_params[:yt_id])
 
     if !yt_id_parsed
       flash[:alert] = "Invalid search! Are you entering a full YouTube URL?"
@@ -31,7 +29,7 @@ class VideosController < ApplicationController
     elsif Video.find_by_yt_id(yt_id_parsed[2])
       return redirect_to Video.find_by_yt_id(yt_id_parsed[2])
     else
-      new_video = Video.make_video(yt_id_parsed)
+      new_video = Video.make_video(yt_id_parsed[2])
       redirect_to new_video
     end
   end
@@ -99,7 +97,6 @@ class VideosController < ApplicationController
     ActiveRecord::Base.transaction do
       video.refresh_watches
       video.update_points
-      binding.pry
       video.team.update_attributes(bankroll: (video.team.bankroll + video.salary),
                              salary:   (video.team.salary - video.salary),
                              past_points: (video.team.past_points += video.points)
