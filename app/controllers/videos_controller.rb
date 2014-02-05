@@ -88,7 +88,6 @@ class VideosController < ApplicationController
     # run_cleanup handles adding video's points to past_points so teams can
     # track points from videos that they have destroyed
     run_cleanup(video)
-    video.destroy
     flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
                         in funds!"
     redirect_to team
@@ -100,10 +99,13 @@ class VideosController < ApplicationController
     ActiveRecord::Base.transaction do
       video.refresh_watches
       video.update_points
+      binding.pry
       video.team.update_attributes(bankroll: (video.team.bankroll + video.salary),
                              salary:   (video.team.salary - video.salary),
                              past_points: (video.team.past_points += video.points)
                             )
+      video.team.update_points
+      video.destroy
     end
   end
 

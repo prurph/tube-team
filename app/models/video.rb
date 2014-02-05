@@ -49,17 +49,10 @@ class Video < ActiveRecord::Base
     updates = WatchUpdate.where(created_at: (start_time..end_time),
                                 video_id: self.id)
 
-    updates.sort_by!(&:watches)
-    binding.pry
-    # Almost always there will be more than one update, so check for that case
-    # first. If there is only one update (or none yet), account for that.
-    if updates.length > 1
-      add_watches = updates.last.watches - updates.first.watches
-    elsif updates.length == 1
-      add_watches = updates.first.watches - self.initial_watches
-    else
-      add_watches = 0
-    end
+    updates.sort_by!(&:created_at)
+
+    # Account for the fact there may not be a WatchUpdate yet
+    add_watches = updates.exists? ? updates.last.watches - self.initial_watches : 0
 
     # Here's where to add in a weighting algorithm based on total watches
     self.update_attributes(points: add_watches)
