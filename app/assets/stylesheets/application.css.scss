@@ -64,7 +64,7 @@ a:hover {
   position: relative;
 }
 
-.tt-team-inner, .tt-myteam-inner {
+.tt-team-inner {
   height: 100%;
   margin: 0;
   padding: 5px;
@@ -82,11 +82,8 @@ a:hover {
     height: 200px;
     width: 100%;
   }
-}
-
-.tt-team-inner {
-  &:before {
-    background-color: #BDC3C7;
+  &.me:before {
+    background-color: #F1C40F;
   }
 }
 
@@ -202,14 +199,6 @@ a:hover {
     background-color: #F1C40F;
   }
 }
-
-// .tt-team-inner-show {
-//   background-color: #BDC3C7;
-// }
-
-// .tt-myteam-inner-show {
-//   background-color: #F1C40F;
-// }
 
 .tt-team-splash-show h1 {
   font-size: 50px;
@@ -425,7 +414,21 @@ a:hover {
 .form-container {
   width: 75%;
   margin: 10px auto;
+  text-align: center;
   min-width: 600px;
+  h2 {
+    margin: 20px;
+    font-size: 48px;
+  }
+}
+
+.signup {
+  margin: 20px auto;
+}
+
+.devise-links {
+  width: 100%;
+  text-align: center;
 }
 
 /* nav */

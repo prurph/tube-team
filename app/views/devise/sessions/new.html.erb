@@ -1,22 +1,22 @@
 <div class="container">
   <div class="form-container">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: 'form-inline' }) do |f| %>
-      <div class="form-group">
-        <div><%= f.label :email, class: 'label-width' %><br />
-        <%= f.email_field :email, :autofocus => true, class: 'outline-fix' %></div>
+      <div class="form-container">
+      <h2>Your Team Missed You!</h2>
 
-        <div><%= f.label :password, class: 'label-width' %><br />
-        <%= f.password_field :password, class: 'outline-fix' %></div>
+        <%= f.email_field :email, :autofocus => true, class: 'outline-fix form-control', placeholder: 'Email' %>
+
+        <%= f.password_field :password, class: 'outline-fix, form-control',
+          placeholder: "Password" %>
 
         <% if devise_mapping.rememberable? -%>
-          <div><%= f.label :remember_me %><%= f.check_box :remember_me %> </div>
+          <div class="form-group">
+            <%= f.label :remember_me %><%= f.check_box :remember_me %>
+          </div>
         <% end -%>
-
-        <div><%= f.submit "Sign in", class: 'btn btn-blue' %></div>
       </div>
+      <%= f.submit "Sign in", class: 'btn btn-blue' %>
     <% end %>
   </div>
-</div>
-
   <%= render "devise/shared/links" %>
 </div>
