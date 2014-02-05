@@ -3,7 +3,7 @@
     <ul class="nav nav-pills">
       <% if user_signed_in? %>
         <li>
-          <div class="nav-user"><%= current_user.username %></div>
+          <div class="nav-user"><%= link_to current_user.username, users_path %></div>
         </li>
         <li>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>

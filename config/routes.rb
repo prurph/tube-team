@@ -13,7 +13,6 @@ TubeTeam::Application.routes.draw do
     resources :videos, only: [:edit, :update, :destroy]
   end
 
-  get 'style' => 'static_pages#style'
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

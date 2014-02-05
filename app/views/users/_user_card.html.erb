@@ -1,11 +1,11 @@
-<div class="tt-user-outer" id="<%= user.username %>">
-  <div class="tt-user-inner">
+<div class="tt-user-outer <%= is_me %>" id="<%= user.username %>">
+  <div class="tt-user-inner <%= is_me %>">
     <div class="tt-user-slogan">
       <%= link_to gravatar_for(user), 'http://www.gravatar.com', target: '_blank' %>
       <h1><%= user.username %></h1>
     </div>
     <div class="tt-user-stats">
-      <table class="table table-hover table-condensed user-table">
+      <table class="table table-condensed user-table">
         <tbody>
           <tr>
             <td>Playing Since</td>
@@ -14,18 +14,24 @@
           <tr>
             <td>Manager of</td>
 
-          <% if user.team.present? %>
+          <% if user.team %>
             <td><%= link_to user.team.name.truncate(19), user.team %></td>
           </tr>
           <tr>
             <td>Total Points</td>
-            <td><%= user.team.points %></td>
+            <td><%= user.team.points_total %></td>
           </tr>
+          <tr>
+            <td>Team Views</td>
+            <td><%= user.team.watches %></td>
           <% else %>
-            <td>(No Team)</td>
+            <% if is_me %>
+              <td><%= link_to "Create new team!", new_team_path %></td>
+            <% else %>
+              <td>(No Team)</td>
+            <% end %>
           </tr>
           <% end %>
-
         </tbody>
       </table>
     </div>

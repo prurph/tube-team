@@ -262,8 +262,8 @@ a:hover {
   padding: 0;
   margin: 0 auto;
   text-align: center;
-  h1 {
-    font-family: Lemon, Lato, sans-serif;
+  h2 {
+    margin: 8px;
   }
 }
 
@@ -336,7 +336,7 @@ a:hover {
 
 .tt-user-outer {
   display: inline-block;
-  width: 445px;
+  width: 425px;
   height: 155px;
   margin: 4px auto;
   border-radius: 3px;
@@ -352,7 +352,7 @@ a:hover {
   float: left;
   margin: 5px;
   height: 145px;
-  width: 435px;
+  width: 415px;
   // height: 245px;
   background-color: #34495E;
   border-radius: 3px;
@@ -364,10 +364,12 @@ a:hover {
 }
 
 .tt-user-slogan {
-  padding: 5px;
-  margin-right: 10px;
-  width: 140px;
+  width: 130px;
+  float: left;
   display: inline-block;
+  position: relative;
+  top: 10px;
+  left: 0px;
   h1 {
     width: 100px;
     margin-top: 10px;
@@ -382,7 +384,7 @@ a:hover {
 
 .tt-user-stats {
   position: relative;
-  top: -5px;
+  top: 5px;
   display: inline-block;
   width: 260px;
   margin: 5px 0;
@@ -455,6 +457,12 @@ a:hover {
   padding: 0 10px;
   font-size: 24px;
   color: #E74C3C;
+  a {
+    color: #E74C3C;
+  }
+  a:hover {
+  color: #8E44AD;
+  }
 }
 
 .tt-logo {

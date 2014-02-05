@@ -1,6 +1,6 @@
 <div class="container">
   <div class="video-card-list cf">
-    <h1>Search Results</h1>
+    <h2>Search Results</h2>
     <% @videos.each do |video| %>
       <%= render partial: 'videos/video_card.html.erb', locals: { video: video,
         is_me: ( 'me' if video.team == current_user.team ) } %>
