@@ -25,7 +25,7 @@
         <tbody>
           <tr>
             <td>Views</td>
-            <td><%= video.initial_watches + video.watches %> (All-time) /
+            <td><%= number_to_human(video.initial_watches + video.watches) %> (All-time) /
              <%= video.watches %> (On Team)</td>
           </tr>
           <tr>

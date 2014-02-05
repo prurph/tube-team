@@ -19,11 +19,11 @@
             </tr>
             <tr>
               <td>Total Points</td>
-              <td><%= team.points_total %></td>
+              <td><%= team.points_total %> (<%= team.watches %> Active Views)</td>
             </tr>
             <tr>
-              <td>Active Views</td>
-              <td><%= team.watches %></td>
+              <td>Available Bankroll</td>
+              <td><%= number_to_human(team.bankroll) %></td>
             </tr>
           </tbody>
         </table>
@@ -36,3 +36,57 @@
     </div>
   </div>
 </div>
+<div class="team-roster container">
+  <table class="table teamvid-table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Views (All-Time/Team)</th>
+        <th>Points</th>
+        <th>Joined</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% team.videos.each do |video| %>
+        <tr>
+          <td><%= link_to video.title.truncate(35), page_path, 'data-toggle' => 'modal',
+            'data-target' => "\##{video.id}modal" %>
+
+
+
+<button class="btn btn-primary" data-toggle="modal" data-target="<%= "\##{video.id}modal" %>">Large modal</button>
+
+<div class="modal fade" id="<%= "#{video.id}modal" %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= video.title %></h4>
+      </div>
+      <div class="modal-body vid-modal">
+        <%= video.embed_html5.html_safe %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+          </td>
+          <td>
+            <%= number_to_human(video.initial_watches + video.watches) %> (All) /
+            <%= video.watches %> (Team)
+          </td>
+          <td><%= video.points %></td>
+          <td><%= video.team.created_at.
+            strftime("%b %e / %Y") %>
+          </td>
+          <td><%= number_to_human(video.initial_watches) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

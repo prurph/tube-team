@@ -22,7 +22,7 @@
         <tbody>
           <tr>
             <td>Views</td>
-            <td><%= video.initial_watches + video.watches %></td>
+            <td><%= number_to_human(video.initial_watches + video.watches) %></td>
           </tr>
           <tr>
             <td>Team</td>

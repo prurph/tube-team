@@ -170,7 +170,7 @@ a:hover {
 
 .find-more {
   position: relative;
-  bottom: 5px;
+  bottom: 28px;
   text-align: center;
 }
 
@@ -236,7 +236,7 @@ a:hover {
   color: #BDC3C7;
   &.me {
     background-color: #F39C12;
-    color: #E74C3;
+    color: #34495E;
     a {
       color: #E74C3C;
     }
@@ -532,4 +532,32 @@ a:hover {
   margin: 10px;
   padding: 0;
   display: inline-block;
+}
+
+/* Vid Lists on Team Pages */
+
+.team-roster {
+  max-width: 995px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.teamvid-table {
+  th {
+    font-size: 16px;
+  }
+}
+
+.modal-body {
+  margin: 0 auto;
+  text-align: center;
+
+  .video-player {
+    height: 315px;
+  }
+}
+
+.modal-header {
+  background-color: #BDC3C7;
+  color: #34495E;
 }
