@@ -564,3 +564,40 @@ a:hover {
 .baby-delete {
   float: right;
 }
+
+/* Home */
+
+#field {
+  width: 450px;
+  height: 450px;
+  position: relative;
+  background: #27AE60;
+  border-radius: 85% 2px 0 2px;
+}
+
+#diamond {
+  width: 200px;
+  height: 200px;
+  background: #E67E22;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  border-radius: 2px;
+}
+
+#bb {
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin: 0 auto;
+  width: 50%;
+}
+
+@media all and (max-width: 800px) {
+  #bb {
+    -moz-transform: scale(0.5) rotate(45deg);
+    -webkit-transform: scale(0.5) rotate(45deg);
+    transform: scale(0.5) rotate(45deg);
+  }
+}
