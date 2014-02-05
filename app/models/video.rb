@@ -50,13 +50,19 @@ class Video < ActiveRecord::Base
                                 video_id: self.id)
 
     updates.sort_by!(&:watches)
-
-    # Short-circuit to assign add_watches to 0 if there are no watch_updates yet
-    add_watches = (updates.blank? ? 0 : updates.last.watches - updates.first.watches)
+    binding.pry
+    # Almost always there will be more than one update, so check for that case
+    # first. If there is only one update (or none yet), account for that.
+    if updates.length > 1
+      add_watches = updates.last.watches - updates.first.watches
+    elsif updates.length == 1
+      add_watches = updates.first.watches - self.initial_watches
+    else
+      add_watches = 0
+    end
 
     # Here's where to add in a weighting algorithm based on total watches
     self.update_attributes(points: add_watches)
-    # self.save
   end
 
   def refresh_watches

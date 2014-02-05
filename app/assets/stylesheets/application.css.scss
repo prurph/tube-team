@@ -28,14 +28,25 @@ a:hover {
 
 .flash {
   position: absolute;
-  margin-left: 40%;
+  margin-left: 50%;
   height: 60px;
-  width: 20%;
+  width: 30%;
   font-size: 16px;
   text-align: center;
+  color: #ECF0F1;
 }
 
+.flash-alert {
+  padding-top: 5px;
+  height: 60px;
+  background-color: #E74C3C;
+}
 
+.flash-notice {
+  padding-top: 5px;
+  height: 60px;
+  background-color: #2ECC71;
+}
 
 /* _team_bar.html.erb (Teams#Index) */
 
@@ -225,7 +236,10 @@ a:hover {
   color: #BDC3C7;
   &.me {
     background-color: #F39C12;
-    color: #34495E;
+    color: #E74C3;
+    a {
+      color: #E74C3C;
+    }
   }
   font-size: 20px;
   z-index: 10;

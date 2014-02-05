@@ -22,12 +22,14 @@ class VideosController < ApplicationController
   end
 
   def create
-    yt_id_parsed = (/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/).match(
-      video_params[:yt_id])[2]
+    yt_id_parsed = (/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)
+      ([^#\&\?]*).*/).match(video_params[:yt_id])
 
-    exists = Video.find_by_yt_id(yt_id_parsed)
-    if exists
-      return redirect_to exists
+    if !yt_id_parsed
+      flash[:alert] = "Invalid search! Are you entering a full YouTube URL?"
+      return redirect_to search_new_path
+    elsif Video.find_by_yt_id(yt_id_parsed[2])
+      return redirect_to Video.find_by_yt_id(yt_id_parsed[2])
     else
       new_video = Video.make_video(yt_id_parsed)
       redirect_to new_video
