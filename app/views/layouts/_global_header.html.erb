@@ -3,14 +3,14 @@
     <ul class="nav nav-pills">
       <% if user_signed_in? %>
         <li>
-          <div class="nav-user"><%= link_to current_user.username, users_path %></div>
+          <div class="nav-user"><%= link_to current_user.username.truncate(12), users_path %></div>
         </li>
         <li>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
         </li>
         <% if current_user.team %>
           <li>
-            <%= link_to current_user.team.name, current_user.team %>
+            <%= link_to current_user.team.name.truncate(25), current_user.team %>
           </li>
           <li>
             <%= link_to "Scout Players", search_new_path %>

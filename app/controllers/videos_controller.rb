@@ -91,11 +91,6 @@ class VideosController < ApplicationController
   private
 
   def run_cleanup(video, team)
-    # Why doesn't this work using video.team to reference the team? For some
-    # reason trying this the team/video association is destroyed first
-    # So even though video still exists, you can't call video.team to access
-    # its team. Will look more into how transaction works as it seems to be
-    # invoking the dependent: :destroy first.
     destroyed_title = video.title
     destroyed_salary = video.salary
     ActiveRecord::Base.transaction do
