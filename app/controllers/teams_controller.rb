@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
-
   before_action :authenticate_user!
+  before_action :get_team, only: [:update, :destroy, :show]
 
   def index
     # Return these in ranked order so we can display rankings
@@ -12,7 +12,6 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find_by_id(params[:id])
     # These refresh video information as well
     # Always do points first (it calls video update watches)
     @team.update_points
@@ -56,43 +55,43 @@ class TeamsController < ApplicationController
   end
 
   def update
-    team = Team.find(params[:id])
-    if current_user.id != team.user_id
-      flash[:notice] = "You're not the manager of #{team.name}!"
-      return redirect_to team
+    if current_user.id != @team.user_id
+      flash[:notice] = "You're not the manager of #{@team.name}!"
+      return redirect_to @team
     else
-      team.update_attributes(team_params)
+      @team.update_attributes(team_params)
     end
 
-    if team.save
+    if @team.save
       flash[:notice] = "Team name updated!"
-      redirect_to team
+      redirect_to @team
     else
-      flash.now[:alert] = article.errors.full_messages.join(', ')
+      flash.now[:alert] = @team.errors.full_messages.join(', ')
       render :edit
     end
   end
 
   def destroy
-    team = Team.find(params[:id])
-    videos = team.videos
-
-    if current_user.id != team.user_id
+    if current_user.id != @team.user_id
       flash[:notice] = "You're not the manager of #{team.name}!"
-      return redirect_to team
+      return redirect_to @team
     else
       # videos have dependent: :destroy relationship with team
-      if team.destroy
+      if @team.destroy
         flash[:notice] = "Team deleted"
         redirect_to action: :new
       else
-        flash[:alert] = team.errors.full_messages.join(', ')
+        flash[:alert] = @team.errors.full_messages.join(', ')
         redirect_to :edit
       end
     end
   end
 
   private
+
+  def get_team
+    @team = Team.find(params[:id])
+  end
 
   def team_params
     params.require(:team).permit(:name)

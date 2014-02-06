@@ -44,14 +44,9 @@ class VideosController < ApplicationController
   end
 
   def edit
-    # @team = Team.find(params[:team_id])
-    # @video = Video.find(params[:id])
   end
 
   def update
-    # team = Team.find(params[:team_id])
-    # video = Video.find(params[:id])
-
     # Check for traps: form trickery to change another user's team
     # or not enough money to sign
 
@@ -80,8 +75,6 @@ class VideosController < ApplicationController
   end
 
   def destroy
-    # team = Team.find(params[:team_id])
-    # video = Video.find(params[:id])
     if @team.user != current_user
       flash[:alert] = "You are not the manager of #{team.name}!"
       return redirect_to @team
