@@ -30,15 +30,15 @@
         </tr>
         <tr>
           <td>Team Funds:</td>
-          <td><%= number_to_currency(@team.bankroll) %>
+          <td><%= number_to_currency(@team.bankroll, precision: 0) %>
         </tr>
         <tr>
           <td>Salary:</td>
-          <td><%= number_to_currency(@video.salary) %></td>
+          <td><%= number_to_currency(@video.salary, precision: 0) %></td>
         </tr>
         <tr class="amt-left">
           <td>Left after signing:</td>
-          <td><%= number_to_currency(@team.bankroll - @video.salary) %></td>
+          <td><%= number_to_currency(@team.bankroll - @video.salary, precision: 0) %></td>
         </tr>
       </tbody>
     </table>
