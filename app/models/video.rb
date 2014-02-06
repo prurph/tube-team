@@ -88,7 +88,6 @@ class Video < ActiveRecord::Base
   end
 
   def run_cleanup
-    binding.pry
     team = self.team
     destroyed_info = {title: self.title, salary: self.salary}
     ActiveRecord::Base.transaction do
@@ -98,6 +97,7 @@ class Video < ActiveRecord::Base
                              salary:   (team.salary - destroyed_info[:salary]),
                              past_points: (team.past_points += self.points)
                             )
+      binding.pry
       team.update_points
       self.destroy
     end
