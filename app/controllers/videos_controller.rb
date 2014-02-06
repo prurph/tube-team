@@ -86,6 +86,7 @@ class VideosController < ApplicationController
     # run_cleanup handles adding video's points to past_points so teams can
     # track points from videos that they have destroyed
     run_cleanup(video)
+    video.destroy
     flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
                         in funds!"
     redirect_to team
@@ -94,6 +95,10 @@ class VideosController < ApplicationController
   private
 
   def run_cleanup(video)
+    # This seems necessary otherwise errors below about calling
+    # bankroll on nil class (b/c video.team doesn't exist with destroy)
+    # But why does this happen with the transaction block given its order
+    # Removed video.destroy from this block but ideally it should be inside
     ActiveRecord::Base.transaction do
       video.refresh_watches
       video.update_points
@@ -102,7 +107,6 @@ class VideosController < ApplicationController
                              past_points: (video.team.past_points += video.points)
                             )
       video.team.update_points
-      video.destroy
     end
   end
 
