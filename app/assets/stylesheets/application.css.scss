@@ -35,9 +35,9 @@ header {
 /* Flash alert and notice */
 
 .flash {
+  margin: 0;
   position: relative;
   top: -4px;
-  margin: 0;
   height: 60px;
   width: 100%;
   font-size: 16px;
@@ -571,9 +571,22 @@ header {
 
 #field {
   position: relative;
-  height: 500px;
+  height: 600px;
   width: 100%;
 }
+
+#midfield {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  z-index: 1;
+  h2 {
+    color: #ECF0F1;
+    font-size: 42px;
+    text-align: center;
+  }
+}
+
 
 #diamond {
   width: 350px;
@@ -660,24 +673,26 @@ header {
 .steps {
   font-size: 18px;
   color: #E74C3C;
-  width: 150px;
+  width: 200px;
   position: absolute;
   border-radius: 3px;
   &#one {
-    right: 85px;
-    top: 35%;
+    right: 10px;
+    top: 35%%;
   }
   &#two {
-    left: 23%;
+    right: 23%;
     top: 10px;
   }
   &#three {
-    bottom: 115px;
-    left: 12%;
+    text-align: right;
+    top: 35%;
+    left: 8px;
   }
   &#four {
-    right: 23%;
-    bottom: 0;
+    width: 250px;
+    right: 30%;
+    bottom: 30px;
   }
 }
 
