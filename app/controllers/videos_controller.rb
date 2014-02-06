@@ -1,3 +1,5 @@
+# RESTful actions for videos + create_many for general queries that return
+# multiple video models
 class VideosController < ApplicationController
   before_action :authenticate_user!
   before_action :get_team_and_video, only: [:update, :destroy, :edit]
@@ -49,24 +51,25 @@ class VideosController < ApplicationController
   def update
     # Check for traps: form trickery to change another user's team
     # or not enough money to sign
+    salary = @video.salary
 
     if current_user.team.id != @team.id
-      flash[:alert] = "You are not the manager of #{team.name}!"
+      flash[:alert] = "You are not the manager of #{@team.name}!"
       # Confused on when I need explicit returns with redirect_to and render
       return redirect_to team_path(@team)
     elsif @video.team
-      flash[:alert] = "Video already on #{video.team.name}"
+      flash[:alert] = "Video already on team: #{@video.team_name}"
       return redirect_to team_path(@team)
-    elsif exceed_cap(@video.salary)
+    elsif exceed_cap(salary)
       flash[:alert] = "Insufficient funds! Find a cheaper player!"
       return redirect_to @video
     end
 
     # Otherwise sign the video to the team
     if @team.videos << @video
-      flash[:notice] = "Video signed! #{@video.salary} deducted."
-      @team.update_attributes(bankroll: (@team.bankroll - @video.salary),
-                             salary:   (@team.salary + @video.salary))
+      flash[:notice] = "Video signed! #{salary} deducted."
+      @team.update_attributes(bankroll: (@team.bankroll - salary),
+                             salary:   (@team.salary + salary))
       redirect_to @team
     else
       flash.now[:alert] = @team.errors.full_messages.join(', ')
@@ -79,33 +82,15 @@ class VideosController < ApplicationController
       flash[:alert] = "You are not the manager of #{team.name}!"
       return redirect_to @team
     end
-
-    # run_cleanup handles adding video's points to past_points so teams can
-    # track points from videos that they have destroyed
-    destro = run_cleanup(@video, @team)
-    flash[:notice] = "#{destro[:title]} is now a free agent! You regain #{destro[:salary]}
-                        in funds!"
+    # run_cleanup shifts deleted team's points to the team's past_points
+    # thus teams track previous points earned by videos they have since released
+    destro = @video.run_cleanup
+    flash[:notice] = "#{destro[:title]} is now a free agent! You regain " +
+                     "#{destro[:salary]} in funds!"
     redirect_to @team
   end
 
   private
-
-  def run_cleanup(video, team)
-    destroyed_title = video.title
-    destroyed_salary = video.salary
-    ActiveRecord::Base.transaction do
-      video.refresh_watches
-      video.update_points
-      team.update_attributes(bankroll: (team.bankroll + video.salary),
-                             salary:   (team.salary - video.salary),
-                             past_points: (team.past_points += video.points)
-                            )
-      team.update_points
-      video.destroy
-    end
-    return {title: destroyed_title, salary: destroyed_salary}
-  end
-
   def get_team_and_video
     @team = Team.find(params[:team_id])
     @video = Video.find(params[:id])

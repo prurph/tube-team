@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td>Team</td>
-            <td><%= video.team ? (link_to video.team.name.truncate(25), video.team)
+            <td><%= video.team ? (link_to video.team_name.truncate(25), video.team)
                                  : "Free Agent" %></td>
           </tr>
           <% if video.team %>

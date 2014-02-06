@@ -1,3 +1,4 @@
+# RESTful actions for teams
 class TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_team, only: [:update, :destroy, :show]

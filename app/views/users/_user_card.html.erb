@@ -15,7 +15,7 @@
             <td>Manager of</td>
 
           <% if user.team %>
-            <td><%= link_to user.team.name.truncate(19), user.team %></td>
+            <td><%= link_to user.team_name.truncate(19), user.team %></td>
           </tr>
           <tr>
             <td>Total Points</td>
@@ -23,7 +23,7 @@
           </tr>
           <tr>
             <td>Team Views</td>
-            <td><%= user.team.watches %></td>
+            <td><%= user.team_watches %></td>
           <% else %>
             <% if is_me %>
               <td><%= link_to "Create new team!", new_team_path %></td>

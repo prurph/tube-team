@@ -1,7 +1,9 @@
+# Video model functionality (actual API calls in here)
 class Video < ActiveRecord::Base
   belongs_to :team
   has_one :user, through: :teams
-  has_many :watch_updates, dependent: :destroy # Destroy watch_updates when video is
+  has_many :watch_updates, dependent: :destroy
+  delegate :name, to: :team, prefix: true
 
   validates :yt_id, presence: true, uniqueness: true
 
@@ -40,7 +42,6 @@ class Video < ActiveRecord::Base
     # Make an array of video objects from the API results
     videos.map! do |video|
       vid_in_db = Video.find_by_yt_id(video.unique_id)
-      # If video already exists, use db entry, otherwise make a model from API data
       video = vid_in_db.present? ? vid_in_db : Video.make_video(video.unique_id)
     end
   end
@@ -52,7 +53,8 @@ class Video < ActiveRecord::Base
     updates.sort_by!(&:created_at)
 
     # Account for the fact there may not be a WatchUpdate yet
-    add_watches = updates.exists? ? updates.last.watches - self.initial_watches : 0
+    add_watches = updates.exists? ? updates.last.watches -
+                                    self.initial_watches : 0
 
     # Here's where to add in a weighting algorithm based on total watches
     self.update_attributes(points: add_watches)
@@ -71,7 +73,8 @@ class Video < ActiveRecord::Base
 
       # Update the watch count in the video entry itself to track watches since
       # joining the user's team
-      self.update_attributes(watches: (new_data.view_count - self.initial_watches))
+      self.update_attributes(watches: (new_data.view_count -
+                                       self.initial_watches))
 
       # Check to see if a watch with this # of views already exists
       existing_update = self.watch_updates.where(video_id: self.id,
@@ -84,4 +87,20 @@ class Video < ActiveRecord::Base
     end
   end
 
+  def run_cleanup
+    binding.pry
+    team = self.team
+    destroyed_info = {title: self.title, salary: self.salary}
+    ActiveRecord::Base.transaction do
+      self.refresh_watches
+      self.update_points
+      team.update_attributes(bankroll: (team.bankroll + destroyed_info[:salary]),
+                             salary:   (team.salary - destroyed_info[:salary]),
+                             past_points: (team.past_points += self.points)
+                            )
+      team.update_points
+      self.destroy
+    end
+    return destroyed_info
+  end
 end

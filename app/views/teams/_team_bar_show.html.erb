@@ -49,7 +49,7 @@
       <% end %>
     </div>
     <div class="tt-manager-panel <%= is_me %>">
-      <h1><%= link_to team.user.username, users_path %></h1>
+      <h1><%= link_to team.user_username, users_path %></h1>
       <p>Manager<p>
       <%= link_to gravatar_for(team.user), 'http://www.gravatar.com', target: '_blank' %>
     </div>

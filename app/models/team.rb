@@ -1,6 +1,9 @@
+# Team class functionality (update_points and watches build team attributes
+# from its constituent videos' stats)
 class Team < ActiveRecord::Base
   belongs_to :user
   has_many :videos, dependent: :destroy
+  delegate :username, to: :user, prefix: true
 
   validates :name, presence: true, uniqueness: true
   validates :user_id, presence: true, uniqueness: true

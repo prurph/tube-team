@@ -1,3 +1,4 @@
+# Users controller; currently no show view
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -10,9 +11,6 @@ class UsersController < ApplicationController
     if @user.team.present?
       @team = @user.team
       if @team.videos.present?
-        # Update the watches
-        # @team.videos.each { |video| video.refresh_watches }
-        # @videos = @team.videos
         @team.update_points
         @team.update_watches
       end
