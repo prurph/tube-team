@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20140204171324) do
     t.text     "author"
     t.string   "embed_html5"
     t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "title"
     t.text     "thumbnail"
-    t.datetime "updated_at"
-    t.datetime "created_at"
     t.integer  "points"
   end
 

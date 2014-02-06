@@ -14,12 +14,7 @@ class Team < ActiveRecord::Base
     tot_points = 0
 
     self.videos.each do |video|
-      # Don't refresh if updated in past 10 minutes, unless video was created
-      # Less than 10 minutes ago (don't want people to lose faith in the
-      # system if none of their brand-new videos every update)
-      if (Time.now - video.updated_at > 300 && Time.now - video.created_at > 300)
-        video.refresh_watches
-      end
+      video.refresh_watches
       video.update_points(start_time, end_time)
       tot_points += video.points
     end

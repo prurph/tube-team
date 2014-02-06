@@ -59,24 +59,28 @@ class Video < ActiveRecord::Base
   end
 
   def refresh_watches
-    client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
-    new_data = client.video_by(self.yt_id)
+    # Only make the API call if data is more than five minutes old or video is
+    # brand new
+    if (Time.now - self.updated_at > 300 && Time.now - self.created_at > 60)
+      client = YouTubeIt::Client.new(dev_key: ENV['YT_DEV_KEY'])
+      new_data = client.video_by(self.yt_id)
 
-    attributes = {
-                  watches: new_data.view_count
-    }
+      attributes = {
+                    watches: new_data.view_count
+      }
 
-    # Update the watch count in the video entry itself to track watches since
-    # joining the user's team
-    self.update_attributes(watches: (new_data.view_count - self.initial_watches))
+      # Update the watch count in the video entry itself to track watches since
+      # joining the user's team
+      self.update_attributes(watches: (new_data.view_count - self.initial_watches))
 
-    # Check to see if a watch with this # of views already exists
-    existing_update = self.watch_updates.where(video_id: self.id,
-                                               watches: new_data.view_count)
-    if existing_update.blank?
-      update = WatchUpdate.create(attributes)
-      self.watch_updates << update
-      self.save
+      # Check to see if a watch with this # of views already exists
+      existing_update = self.watch_updates.where(video_id: self.id,
+                                                 watches: new_data.view_count)
+      if existing_update.blank?
+        update = WatchUpdate.create(attributes)
+        self.watch_updates << update
+        self.save
+      end
     end
   end
 
