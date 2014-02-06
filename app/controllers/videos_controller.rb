@@ -58,6 +58,9 @@ class VideosController < ApplicationController
       flash[:alert] = "You are not the manager of #{team.name}!"
       # Confused on when I need explicit returns with redirect_to and render
       return redirect_to team_path(team)
+    elsif video.team
+      flash[:alert] = "Video already on #{video.team.name}"
+      return redirect_to team_path(team)
     elsif exceed_cap(video.salary)
       flash[:alert] = "Insufficient funds! Find a cheaper player!"
       return redirect_to video

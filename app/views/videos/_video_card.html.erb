@@ -12,10 +12,10 @@
               from your team immediately. Confirm?",
               }
           %>
-        <% else %>
+        <% elsif !video.team %>
           <%= link_to image_tag("check@2x.png", size: "40x40", alt: "Sign Player",
-              title: "Sign player to your team"),
-              edit_team_video_path(team_id: current_user.team, id: video) %>
+            title: "Sign player to your team"),
+            edit_team_video_path(team_id: current_user.team, id: video) %>
         <% end %>
       </div>
     </div>
