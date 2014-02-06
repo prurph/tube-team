@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
       team.update_points
       team.update_watches
     end
-    @teams = Team.all_sorted_by_point_total
+    @teams = Team.order('points + past_points DESC')
   end
 
   def show
