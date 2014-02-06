@@ -5,7 +5,7 @@ TubeTeam::Application.routes.draw do
   post 'search/new' => 'videos#create_many'
 
 
-  resources :users
+  resources :users, only: [:index]
   resources :teams
   resources :videos, only: [:create, :create_many, :show]
 
