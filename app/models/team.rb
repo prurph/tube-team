@@ -10,7 +10,7 @@ class Team < ActiveRecord::Base
     self.points + self.past_points
   end
 
-  def update_points(start_time=Time.new(2014), end_time=Time.now)
+  def update_points(start_time=Time.new(2013), end_time=Time.now)
     tot_points = 0
 
     self.videos.each do |video|
