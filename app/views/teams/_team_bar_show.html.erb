@@ -37,7 +37,7 @@
             </tr>
             <tr>
               <td>Available Bankroll</td>
-              <td><%= number_to_human(team.bankroll) %></td>
+              <td>$<%= number_to_human(team.bankroll) %></td>
             </tr>
           </tbody>
         </table>
@@ -93,7 +93,7 @@
           <td><%= video.team.created_at.
             strftime("%b %e / %Y") %>
           </td>
-          <td><%= number_to_human(video.initial_watches) %>
+          <td><%= number_to_currency(video.initial_watches) %>
             <% if is_me %>
               <div class="baby-delete">
                 <%= link_to image_tag("trash@2x.png", size: "20x20", alt: "Release Player",

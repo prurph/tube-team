@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     if !user_signed_in? || current_user.team.blank?
       flash[:alert] = "Please create a team before scouting for players."
