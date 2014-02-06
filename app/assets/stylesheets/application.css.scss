@@ -2,7 +2,7 @@
 @import "flat-ui";
 @import url(http://fonts.googleapis.com/css?family=Lemon|Carrois+Gothic);
 
-/* Basic Overrides */
+/* Basic Overrides and Cross-Page Stuff */
 a {
   text-decoration: none;
   color: #E67E22;
@@ -16,7 +16,9 @@ a:hover {
   width: 970px;
 }
 
-
+header {
+  height: 60px;
+}
 
 /* Micro Clearfix */
 
@@ -419,7 +421,7 @@ a:hover {
   text-align: center;
   min-width: 600px;
   h2 {
-    margin: 20px;
+    margin: 60px 20px 20px 20px;
     font-size: 48px;
   }
 }
@@ -568,36 +570,119 @@ a:hover {
 /* Home */
 
 #field {
-  width: 450px;
-  height: 450px;
   position: relative;
-  background: #27AE60;
-  border-radius: 85% 2px 0 2px;
+  height: 500px;
+  width: 100%;
 }
 
 #diamond {
-  width: 200px;
-  height: 200px;
-  background: #E67E22;
+  width: 350px;
+  height: 350px;
+  background: #9C7F41;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
+  left: 12%;
+  top: 140px;
   border-radius: 2px;
-}
-
-#bb {
   -moz-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
-  margin: 0 auto;
-  width: 50%;
+  -moz-transform-origin: 100% 100%;
+  -webkit-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  -moz-box-shadow: 0 0 3px 3px #2C3E50;
+  -webkit-box-shadow: 0 0 3px 3px #2C3E50;
+  box-shadow: 0 0 3px 3px #2C3E50;
+  margin: 0;
 }
 
-@media all and (max-width: 800px) {
-  #bb {
-    -moz-transform: scale(0.5) rotate(45deg);
-    -webkit-transform: scale(0.5) rotate(45deg);
-    transform: scale(0.5) rotate(45deg);
+.base {
+  width: 75px;
+  height: 75px;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 15;
+}
+
+#uno {
+  background: #ECF0F1 image-url('Pensils@2x.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: 0px;
+  right: 0px;
+}
+
+#dos {
+  background: #ECF0F1 image-url('Search@2x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  top: 0px;
+  left: 0px;
+}
+#tres {
+  background: #ECF0F1 image-url('check@2x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 0px;
+  left: 0px;
+}
+#cuatro {
+  background: #ECF0F1;
+  bottom: 0px;
+  right: 0px;
+  overflow: hidden;
+}
+
+#score {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  left: 7px;
+  background: image-url('medal@2x.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  z-index: 10;
+}
+
+.promo {
+  text-align: center;
+  em {
+    font-style: normal;
+    font-size: 110%;
   }
+}
+
+.steps {
+  font-size: 18px;
+  color: #E74C3C;
+  width: 150px;
+  position: absolute;
+  border-radius: 3px;
+  &#one {
+    right: 85px;
+    top: 35%;
+  }
+  &#two {
+    left: 23%;
+    top: 10px;
+  }
+  &#three {
+    bottom: 115px;
+    left: 12%;
+  }
+  &#four {
+    right: 23%;
+    bottom: 0;
+  }
+}
+
+.numb {
+  font-weight: bold;
+  font-size: 105%;
+  color: #2C3E50;
 }

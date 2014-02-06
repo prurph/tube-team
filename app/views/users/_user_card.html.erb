@@ -1,8 +1,8 @@
 <div class="tt-user-outer <%= is_me %>" id="<%= user.username %>">
   <div class="tt-user-inner <%= is_me %>">
     <div class="tt-user-slogan">
-      <%= link_to gravatar_for(user), 'http://www.gravatar.com', target: '_blank' %>
-      <h1><%= user.username %></h1>
+      <%= gravatar_for(user) %>
+      <h1> <%= user.username %></h1>
     </div>
     <div class="tt-user-stats">
       <table class="table table-condensed user-table">
