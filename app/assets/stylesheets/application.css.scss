@@ -573,14 +573,18 @@ a:hover {
 }
 
 #midfield {
-  position: absolute;
-  top: 30%;
-  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  top: 36%;
+  width: 250px;
   z-index: 1;
+  background-color: #ECF0F1;
+  border-radius: 2px;
   h2 {
     color: #ECF0F1;
     font-size: 42px;
     text-align: center;
+    color: #7F8C8D;
   }
 }
 
@@ -610,7 +614,9 @@ a:hover {
   height: 75px;
   border-radius: 2px;
   position: absolute;
-  z-index: 15;
+  z-index: 1;
+  border: 2px solid #ECF0F1;
+  border-radius: 2px;
 }
 
 #uno {
@@ -697,4 +703,9 @@ a:hover {
   font-weight: bold;
   font-size: 105%;
   color: #2C3E50;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  z-index: 10;
 }

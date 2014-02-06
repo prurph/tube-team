@@ -4,26 +4,33 @@
       <h1><em>TubeTeam:</em> fantasy sports meets YouTube!<h1>
     </div>
     <div id="field">
-
-      <div class="steps" id="two">
-        <span class="numb">2</span> search for videos!
-      </div>
-      <div class="steps" id="three">
-        <span class="numb">3</span> sign videos!<br>More popular videos cost more.
-      </div>
-      <div class="steps" id="four">
-        <span class="numb">Score!</span> You earn points whenever your video is viewed...anywhere!
-      </div>
-      <div class="steps" id="one">
-        <span class="numb">1</span> create and name your team!
-      </div>
+        <div class="steps" id="two">
+          <span class="numb">2</span> search for videos!
+        </div>
+        <div class="steps" id="three">
+          <span class="numb">3</span> sign videos!<br>More popular videos cost more.
+        </div>
+        <div class="steps" id="four">
+          <span class="numb">Score!</span> You earn points whenever your video is viewed...anywhere!
+        </div>
+        <div class="steps" id="one">
+          <span class="numb">1</span> create and name your team!
+        </div>
       <div id="midfield"><h2>as easy as...<h2></div>
       <div id="diamond">
-        <div class="base" id="uno"></div>
-        <div class="base" id="dos"></div>
-        <div class="base" id="tres"></div>
-        <div class="base" id="cuatro"><div id="score"></div></div>
+        <div class="base clickable" id="uno"><%= link_to '', new_team_path %></div>
+        <div class="base clickable" id="dos"><%= link_to '', search_new_path %></div>
+        <div class="base clickable" id="tres"><%= link_to '', search_new_path %></div>
+        <div class="base clickable" id="cuatro"><div id="score"></div><%= link_to '',teams_path %></div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(".clickable").click(function() {
+    window.location = $(this).find('a').attr('href');
+    return false;
+  });
+</script>
+
