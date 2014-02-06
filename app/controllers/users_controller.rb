@@ -11,10 +11,11 @@ class UsersController < ApplicationController
       @team = @user.team
       if @team.videos.present?
         # Update the watches
-        @team.videos.each { |video| video.refresh_watches }
-        @videos = @team.videos
+        # @team.videos.each { |video| video.refresh_watches }
+        # @videos = @team.videos
+        @team.update_points
+        @team.update_watches
       end
-      @team.update_points
     end
   end
 end
