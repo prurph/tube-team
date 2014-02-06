@@ -85,29 +85,35 @@ class VideosController < ApplicationController
 
     # run_cleanup handles adding video's points to past_points so teams can
     # track points from videos that they have destroyed
-    run_cleanup(video)
-    video.destroy
-    flash[:notice] = "#{video.title} is now a free agent! You regain #{video.salary}
+    binding.pry
+    destro = run_cleanup(video, team)
+    binding.pry
+    flash[:notice] = "#{destro[:title]} is now a free agent! You regain #{destro[:salary]}
                         in funds!"
     redirect_to team
   end
 
   private
 
-  def run_cleanup(video)
-    # This seems necessary otherwise errors below about calling
-    # bankroll on nil class (b/c video.team doesn't exist with destroy)
-    # But why does this happen with the transaction block given its order
-    # Removed video.destroy from this block but ideally it should be inside
+  def run_cleanup(video, team)
+    # Why doesn't this work using video.team to reference the team? For some
+    # reason trying this the team/video association is destroyed first
+    # So even though video still exists, you can't call video.team to access
+    # its team. Will look more into how transaction works as it seems to be
+    # invoking the dependent: :destroy first.
+    destroyed_title = video.title
+    destroyed_salary = video.salary
     ActiveRecord::Base.transaction do
       video.refresh_watches
       video.update_points
-      video.team.update_attributes(bankroll: (video.team.bankroll + video.salary),
-                             salary:   (video.team.salary - video.salary),
-                             past_points: (video.team.past_points += video.points)
+      team.update_attributes(bankroll: (team.bankroll + video.salary),
+                             salary:   (team.salary - video.salary),
+                             past_points: (team.past_points += video.points)
                             )
-      video.team.update_points
+      team.update_points
+      video.destroy
     end
+    return {title: destroyed_title, salary: destroyed_salary}
   end
 
   def video_params

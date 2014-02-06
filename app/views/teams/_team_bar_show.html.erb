@@ -98,7 +98,7 @@
               <div class="baby-delete">
                 <%= link_to image_tag("trash@2x.png", size: "20x20", alt: "Release Player",
                   class: 'tt-admin-img', title: "Release Player"),
-                  team_video_path(team_id: team.id, video_id: video.id), method: :delete, data: { confirm: "This will drop #{video.title.truncate(30)} immediately. Confirm?" } %>
+                  team_video_path(team_id: team.id, id: video.id), method: :delete, data: { confirm: "This will drop #{video.title.truncate(30)} immediately. Confirm?" } %>
               </div>
             <% end %>
           </td>
