@@ -97,7 +97,6 @@ class Video < ActiveRecord::Base
                              salary:   (team.salary - destroyed_info[:salary]),
                              past_points: (team.past_points += self.points)
                             )
-      binding.pry
       team.update_points
       self.destroy
     end
