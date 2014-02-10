@@ -48,6 +48,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
 end
 
 group :test do
