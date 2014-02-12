@@ -43,4 +43,9 @@ describe User do
       end
     end
   end
+
+  describe "associations" do
+    it { should have_one :team }
+    it { should have_many :videos }
+  end
 end
