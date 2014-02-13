@@ -5,11 +5,11 @@ class TeamsController < ApplicationController
 
   def index
     # Return these in ranked order so we can display rankings
-    Team.all.each do |team|
+    @teams = Team.includes(:videos, :user).order('points + past_points DESC')
+    @teams.each do |team|
       team.update_points
       team.update_watches
     end
-    @teams = Team.order('points + past_points DESC')
   end
 
   def show
@@ -36,13 +36,13 @@ class TeamsController < ApplicationController
                    bankroll: 10000000, # This is default starting cash for now
                    salary: 0
                   }
-    team = Team.create!(attributes.merge(team_params))
+    team = Team.create(attributes.merge(team_params))
 
-    if current_user.save
+    if team.save
       flash[:notice] = "Team created!"
-      redirect_to team
+      redirect_to root_path
     else
-      flash.now[:alert] = article.errors.full_messages.join(', ')
+      flash.now[:alert] = team.errors.full_messages.join(', ')
       render :new
     end
   end

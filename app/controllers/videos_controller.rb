@@ -5,8 +5,7 @@ class VideosController < ApplicationController
   before_action :get_team_and_video, only: [:update, :destroy, :edit]
 
   def show
-    @videos = Video.find params[:id].split(',')
-    @videos.sort_by!(&:initial_watches).reverse!
+    @videos = Video.includes(:team).where(id: params[:id].split(',')).order(initial_watches: :desc)
 
     # If only one video stick it in an array so we can iterate over it too
     [@videos] if @videos.class == Video

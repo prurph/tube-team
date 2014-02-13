@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.all.order :username
+    @users = User.includes(:team).order :username
   end
 
   def show
