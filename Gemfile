@@ -6,6 +6,7 @@ gem 'rails', '4.0.2'
 gem 'youtube_it'
 gem 'devise'
 gem 'pry'
+gem 'newrelic_rpm'
 
 # Use postgresql as the database for Active Record
 gem 'pg'

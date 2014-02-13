@@ -113,6 +113,7 @@ GEM
     multi_json (1.8.4)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    newrelic_rpm (3.7.2.192)
     nokogiri (1.5.11)
     oauth (0.4.7)
     oauth2 (0.9.3)
@@ -244,6 +245,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  newrelic_rpm
   pg
   pry
   pry-debugger
