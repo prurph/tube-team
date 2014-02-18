@@ -8,7 +8,7 @@ your team page, or by clicking [Your Team Name] in the nav header)
 - Videos can be searched using general terms ("puppies"), which will return the
 top six results, or by pasting in a specific YouTube URL. The URL can be any
 format (directly from youtube, using the embed link as in http://youtu.be/...,
-etc.)
+etc.). If you want a specific video, it's best to find it on YouTube first.
 - Sign videos from the search results by clicking the green checkbox icon. Each
 video can only be on a single team.
 - Points are scored as the video is viewed! Data is from the YouTube API so views
