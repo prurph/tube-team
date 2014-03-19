@@ -48,30 +48,18 @@ class VideosController < ApplicationController
   end
 
   def update
-    salary = @video.salary
+    @salary = @video.salary
 
     if current_user.team.id != @team.id
       flash[:alert] = "You are not the manager of #{@team.name}!"
-      # Confused on when I need explicit returns with redirect_to and render
-      return redirect_to @team
     elsif @video.team
       flash[:alert] = "Video already on team: #{@video.team_name}"
-      return redirect_to @team
-    elsif exceed_cap(salary)
+    elsif exceed_cap(@salary)
       flash[:alert] = "Insufficient funds! Find a cheaper player!"
-      return redirect_to @video
     end
 
-    # Otherwise sign the video to the team
-    if @team.videos << @video
-      flash[:notice] = "Video signed! #{salary} deducted."
-      @team.update_attributes(bankroll: (@team.bankroll - salary),
-                             salary:   (@team.salary + salary))
-      redirect_to @team
-    else
-      flash.now[:alert] = @team.errors.full_messages.join(', ')
-      redirect_to @video
-    end
+    sign_video
+    redirect_to @team
   end
 
   def destroy
@@ -99,5 +87,15 @@ class VideosController < ApplicationController
 
   def exceed_cap(vidsalary)
     current_user.team.bankroll < vidsalary
+  end
+
+  def sign_video
+    if @team.videos << @video
+      flash[:notice] = "Video signed! #{@salary} deducted."
+      @team.update_attributes(bankroll: (@team.bankroll - @salary),
+                             salary:   (@team.salary + @salary))
+    else
+      flash[:alert] = @team.errors.full_messages.join(', ')
+    end
   end
 end
