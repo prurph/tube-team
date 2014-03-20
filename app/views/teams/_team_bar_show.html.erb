@@ -90,8 +90,7 @@
             <%= video.watches %>
           </td>
           <td><%= video.points %></td>
-          <td><%= team.created_at.
-            strftime("%b %e / %Y") %>
+          <td><%= video.created_at.strftime("%b %e / %Y") %>
           </td>
           <td><%= number_to_currency(video.initial_watches, precision: 0) %>
             <% if is_me %>
