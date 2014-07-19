@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
     tot_points = 0
 
     self.videos.each do |video|
-      video.refresh_watches
+      video.refresh_watches rescue false
       video.update_points(start_time, end_time)
       tot_points += video.points
     end
